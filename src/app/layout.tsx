@@ -8,6 +8,7 @@ import Navbar from "../components/Navbar/index"; // Asumo que tienes el Navbar a
 // 1. IMPORTAR EL COMPONENTE JSON-LD
 import JsonLd from "../components/JsonLd/JsonLd";
 import Cursor from '@/components/Cursor/Cursor';
+import { Analytics } from "@vercel/analytics/next"
 
 
 const manrope = Manrope({ subsets: ["latin"] });
