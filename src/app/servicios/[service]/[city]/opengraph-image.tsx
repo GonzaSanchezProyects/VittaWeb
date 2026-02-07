@@ -1,20 +1,22 @@
 import { ImageResponse } from 'next/og';
 import { LOCATIONS, SERVICES } from '@/lib/seo-data';
 
-// Configuración: Rutime Edge para que sea instantáneo
+// Configuración: Runtime Edge para que sea instantáneo
 export const runtime = 'edge';
 export const alt = 'Vitta Studio Service';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
 type Props = {
-  params: { service: string; city: string };
+  params: Promise<{ service: string; city: string }>;
 };
 
 export default async function Image({ params }: Props) {
   // Buscamos los datos específicos de esta URL
-  const serviceData = SERVICES.find((s) => s.slug === params.service);
-  const cityData = LOCATIONS.find((c) => c.slug === params.city);
+  const { service: serviceSlug, city: citySlug } = await params;
+  
+  const serviceData = SERVICES.find((s) => s.slug === serviceSlug);
+  const cityData = LOCATIONS.find((c) => c.slug === citySlug);
 
   // Fallbacks por seguridad
   const title = serviceData?.name || 'Vitta Studio';
@@ -55,7 +57,6 @@ export default async function Image({ params }: Props) {
           style={{
             fontSize: 80,
             fontWeight: 900,
-            color: 'white',
             textAlign: 'center',
             lineHeight: 1.1,
             padding: '0 60px',
@@ -63,13 +64,13 @@ export default async function Image({ params }: Props) {
             // Efecto de texto gradiente
             backgroundImage: 'linear-gradient(to bottom, #ffffff, #999999)',
             backgroundClip: 'text',
-            color: 'transparent',
+            color: 'transparent', // <--- AHORA SÍ: ÚNICA DEFINICIÓN DE COLOR
           }}
         >
           {title}
         </div>
 
-        {/* Subtítulo de Ciudad (El toque mágico) */}
+        {/* Subtítulo de Ciudad */}
         <div
           style={{
             fontSize: 45,
