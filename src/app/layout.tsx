@@ -59,6 +59,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={manrope.className}>
         
         <JsonLd />
+        <Analytics/>
         
         <MotionProvider>
           <Navbar />
