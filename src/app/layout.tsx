@@ -12,17 +12,44 @@ import Cursor from '@/components/Cursor/Cursor';
 
 const manrope = Manrope({ subsets: ["latin"] });
 
+const baseUrl = "https://vittaweb.site"; 
+
 export const metadata: Metadata = {
-  title: "Vitta Studio | Ingeniería Web de Alto Rendimiento",
-  description: "Estudio de desarrollo web especializado en Next.js, SEO técnico y experiencias digitales escalables.",
-  // Opcional: Configuración básica de OpenGraph para compartir en redes
+  metadataBase: new URL(baseUrl), // Esto arregla los links relativos de imágenes
+  title: {
+    default: "Vitta Studio | Ingeniería Web de Alto Rendimiento",
+    template: "%s | Vitta Studio" // Para que las otras páginas sean "Servicio X | Vitta Studio"
+  },
+  description: "Estudio de desarrollo web especializado en Next.js, SEO técnico y experiencias digitales escalables. Diseño web premium en Argentina y el mundo.",
+  keywords: ["Desarrollo Web", "Next.js", "Agencia SEO", "Diseño Web Mendoza", "Software a Medida"],
+  authors: [{ name: "Gonzalo Sanchez" }],
+  creator: "Vitta Studio",
   openGraph: {
     title: "Vitta Studio | Ingeniería Web",
     description: "Desarrollo de software a medida para empresas que buscan liderar su mercado.",
-    type: "website",
+    url: baseUrl,
+    siteName: "Vitta Studio",
+    images: [
+      {
+        url: "/og-image.jpg", // Asegúrate de tener una imagen 'og-image.jpg' en /public
+        width: 1200,
+        height: 630,
+      },
+    ],
     locale: "es_AR",
-    url: "https://vitaweb.com",
-  }
+    type: "website",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
