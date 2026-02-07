@@ -1,0 +1,10 @@
+.spotlightOverlay {
+  position: fixed; /* Fijo sobre toda la pantalla */
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none; /* Deja pasar los clicks a los elementos de abajo */
+  z-index: 9999; /* Por encima de todo, o ajusta según prefieras (ej: z-index: 1 para estar sobre el fondo) */
+  mix-blend-mode: screen; /* Mezcla la luz con el contenido */
+}

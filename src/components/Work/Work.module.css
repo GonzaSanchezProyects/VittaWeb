@@ -1,0 +1,174 @@
+/* src/components/Work/Work.module.css */
+
+.workSection {
+  height: 400vh; /* Largo para un scroll suave */
+  position: relative;
+  background-color: #050505;
+}
+
+.stickyContainer {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.header {
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  z-index: 10;
+}
+
+.label {
+  color: #fff;
+  opacity: 0.6;
+  letter-spacing: 0.2em;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 8px 16px;
+  border-radius: 100px;
+}
+
+/* CONTENEDOR HORIZONTAL */
+.cardsContainer {
+  display: flex;
+  gap: 4vw; /* Espacio elegante entre fotos */
+  padding-left: 5vw;
+  height: 70vh; /* Altura del bloque visual */
+  align-items: center;
+  width: max-content;
+}
+
+/* INTRO TEXT CARD */
+.introCard {
+  width: 30vw;
+  flex-shrink: 0;
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.mainTitle {
+  font-size: 4rem;
+  line-height: 1;
+  color: #fff;
+  letter-spacing: -0.03em;
+  font-weight: 500;
+}
+
+.highlight {
+  color: #666; /* Gris elegante en lugar de colores chillones */
+}
+
+/* --- NUEVA TARJETA CINEMÁTICA --- */
+.cardWrapper {
+  width: 45vh; /* Ancho basado en la altura para mantener proporción */
+  aspect-ratio: 3/4; /* Formato vertical tipo póster */
+  position: relative;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  transition: transform 0.4s ease;
+  cursor: pointer;
+}
+
+/* Al hover, toda la tarjeta sube un poco */
+.cardWrapper:hover {
+  transform: translateY(-10px);
+}
+
+/* CONTENEDOR DE IMAGEN */
+.cardImageContainer {
+  width: 100%;
+  flex: 1; /* Ocupa todo el espacio disponible menos el texto */
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px; /* Radio sutil, no exagerado */
+  background: #111;
+}
+
+.img {
+  object-fit: cover;
+  transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  filter: grayscale(20%); /* Un poco desaturado para elegancia */
+}
+
+.cardWrapper:hover .img {
+  transform: scale(1.05); /* Zoom lento */
+  filter: grayscale(0%);
+}
+
+.hoverOverlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.1);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.cardWrapper:hover .hoverOverlay {
+  opacity: 1; /* Brillo sutil al hover */
+}
+
+/* INFO DEBAJO DE LA FOTO */
+.cardInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0 5px;
+}
+
+.infoTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 10px;
+  margin-bottom: 5px;
+}
+
+.cat {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #888;
+}
+
+.techBadge {
+  font-family: monospace;
+  font-size: 0.7rem;
+  color: #fff;
+  background: #222;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.projectTitle {
+  font-size: 1.8rem;
+  font-weight: 400; /* Letra fina, muy elegante */
+  color: #fff;
+  margin: 0;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .cardWrapper {
+    width: 75vw; /* Más grande en móvil */
+    aspect-ratio: 9/16; /* Más vertical en móvil */
+  }
+  
+  .introCard {
+    width: 80vw;
+  }
+  
+  .mainTitle {
+    font-size: 3rem;
+  }
+}

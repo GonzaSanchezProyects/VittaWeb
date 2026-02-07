@@ -1,0 +1,40 @@
+.magneticBtn {
+  position: relative;
+  padding: 16px 32px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 30px; /* Redondeado moderno */
+  cursor: pointer;
+  overflow: hidden;
+  color: #fff;
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.text {
+  position: relative;
+  z-index: 2; /* Texto siempre arriba */
+  pointer-events: none;
+}
+
+/* Efecto de llenado al hacer hover (opcional pero cool) */
+.fill {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: #fff;
+  transform: translateY(100%);
+  transition: transform 0.3s cubic-bezier(0.76, 0, 0.24, 1);
+  z-index: 1;
+}
+
+.magneticBtn:hover .fill {
+  transform: translateY(0);
+}
+
+.magneticBtn:hover {
+  color: #000; /* Cambio de color de texto al llenarse */
+  border-color: #fff;
+}

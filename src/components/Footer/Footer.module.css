@@ -1,0 +1,201 @@
+/* src/components/Footer/Footer.module.css */
+
+.footer {
+  background-color: #050505;
+  color: #fff;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 80px 0 30px 0; /* Espaciado equilibrado */
+  position: relative;
+  overflow: hidden;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 40px; /* Márgenes laterales */
+}
+
+/* --- 1. CABECERA (TOP ROW) --- */
+.topRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 60px;
+}
+
+.ctaTextWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ctaLabel {
+  font-size: 0.9rem;
+  color: #00e5ff; /* Acento sutil */
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+}
+
+.ctaTitle {
+  font-size: 3rem; /* Grande, pero no gigante */
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: #fff;
+  margin: 0;
+}
+
+.ctaButton {
+  padding: 16px 32px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #fff;
+  border-radius: 100px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* SEPARADOR */
+.separator {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.1);
+  width: 100%;
+  margin-bottom: 60px;
+}
+
+/* --- 2. GRILLA PRINCIPAL --- */
+.mainGrid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr; /* La primera columna ocupa más espacio */
+  gap: 60px;
+  margin-bottom: 80px;
+}
+
+/* Columna de Marca */
+.brandColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 350px;
+}
+
+.logo {
+  font-weight: 800;
+  font-size: 1.2rem;
+  letter-spacing: -0.02em;
+}
+
+.brandDesc {
+  color: #888;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* Status Pill (Pequeño y elegante) */
+.statusPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 14px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 100px;
+  width: fit-content;
+  font-family: monospace;
+  font-size: 0.75rem;
+  color: #aaa;
+  margin-top: 10px;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  background-color: #00ff88;
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(0, 255, 136, 0.4);
+}
+
+/* Columnas de Links */
+.linksColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.colHeader {
+  font-size: 0.75rem;
+  color: #555;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+}
+
+.linkList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.link {
+  color: #bbb;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: color 0.2s ease;
+}
+
+.link:hover {
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* --- 3. BARRA INFERIOR --- */
+.bottomBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 30px;
+  font-family: monospace;
+  font-size: 0.8rem;
+  color: #555;
+}
+
+.timeDisplay {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.timeDivider {
+  color: #333;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .topRow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 30px;
+  }
+
+  .ctaTitle {
+    font-size: 2.2rem;
+  }
+
+  .mainGrid {
+    grid-template-columns: 1fr; /* Una columna en móvil */
+    gap: 50px;
+  }
+
+  .brandColumn {
+    max-width: 100%;
+  }
+  
+  .bottomBar {
+    flex-direction: column;
+    gap: 15px;
+    align-items: flex-start;
+  }
+}

@@ -1,0 +1,7 @@
+.hyperText {
+  display: inline-block;
+  cursor: default; /* El cursor mecha hará el trabajo */
+  font-family: monospace; /* Se ve mejor con fuentes monoespaciadas, pero funciona con cualquiera */
+  color: inherit;
+  white-space: pre-wrap; /* Mantiene espacios */
+}

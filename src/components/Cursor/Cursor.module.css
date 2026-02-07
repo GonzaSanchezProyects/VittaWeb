@@ -1,0 +1,81 @@
+/* src/components/Cursor/Cursor.module.css */
+.cursorContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 999999;
+  /* Invierte los colores para máximo contraste tech */
+  mix-blend-mode: difference;
+}
+
+/* El contenedor que sigue al mouse */
+.follower {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translate(-50%, -50%);
+}
+
+/* Pieza 1: El Núcleo Central (Rombo) */
+.core {
+  width: 8px;
+  height: 8px;
+  background-color: white;
+  transform: rotate(45deg);
+  position: absolute;
+  z-index: 2;
+}
+
+/* Pieza 2: El Rotor Giratorio */
+.spinnerRing {
+  width: 50px;
+  height: 50px;
+  border: 2px dashed rgba(255, 255, 255, 0.6); /* Borde punteado técnico */
+  border-radius: 50%;
+  position: absolute;
+  /* Animación de rotación infinita */
+  animation: spin 4s linear infinite;
+}
+
+/* Pieza 3: Las Miras de Bloqueo (Corner Brackets) */
+.lockBrackets {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+}
+
+.bracket {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  border-color: white;
+  border-style: solid;
+  opacity: 0; /* Ocultos por defecto */
+}
+
+/* Posicionamos las 4 esquinas */
+.topLeft { top: 0; left: 0; border-width: 2px 0 0 2px; }
+.topRight { top: 0; right: 0; border-width: 2px 2px 0 0; }
+.bottomLeft { bottom: 0; left: 0; border-width: 0 0 2px 2px; }
+.bottomRight { bottom: 0; right: 0; border-width: 0 2px 2px 0; }
+
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@media (hover: none), (pointer: coarse), (max-width: 1024px) {
+  .cursorContainer {
+    display: none !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    visibility: hidden !important;
+  }
+}

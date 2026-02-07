@@ -1,0 +1,193 @@
+/* src/components/Navbar/Navbar.module.css */
+
+/* --- LAYOUT GENERAL --- */
+.navContainer {
+  position: fixed;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  width: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  /* Evita que el contenedor capture clicks fuera de los elementos */
+  pointer-events: none; 
+}
+
+/* La Isla de Vidrio */
+.glassIsland {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(10, 10, 10, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: 6px 8px; /* Padding unificado */
+  border-radius: 100px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.4),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+  transition: all 0.3s ease;
+  pointer-events: auto; /* Reactivamos clicks en la barra */
+}
+
+.glassIsland:hover {
+  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 
+    0 20px 50px rgba(0, 0, 0, 0.5),
+    inset 0 0 20px rgba(0, 229, 255, 0.05);
+}
+
+/* --- LOGO --- */
+.logo {
+  padding-left: 12px;
+  padding-right: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.logoLink {
+  text-decoration: none;
+  cursor: pointer;
+  display: block;
+}
+
+/* --- LINKS --- */
+.navLinks {
+  display: flex;
+  position: relative;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 100px;
+  padding: 4px;
+}
+
+.linkItem {
+  position: relative;
+  padding: 8px 20px;
+  color: #a1a1a1;
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  z-index: 2;
+  border-radius: 100px;
+  cursor: pointer;
+  white-space: nowrap; /* Evita que el texto se parta en dos líneas */
+}
+
+.linkItem:hover {
+  color: #fff;
+}
+
+.activeTab {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 100px;
+  z-index: 1;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* --- STATUS POD (Derecha) --- */
+.statusPod {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 16px;
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+  margin-left: 4px;
+  height: 20px;
+}
+
+.statusDot {
+  width: 6px;
+  height: 6px;
+  background-color: #00ff88;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #00ff88;
+  animation: pulse 2s infinite;
+}
+
+.statusText {
+  font-family: monospace;
+  font-size: 0.7rem;
+  color: #666;
+  white-space: nowrap;
+}
+
+/* --- TÍTULO FLOTANTE --- */
+.brandTitle {
+  font-size: 2.5rem;
+  font-weight: 900;
+  margin: 0;
+  margin-top: 10px; /* Separación de la isla */
+  letter-spacing: -0.04em;
+  line-height: 1;
+  background: linear-gradient(180deg, #FFFFFF 20%, #666666 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  pointer-events: auto; /* Reactivamos clicks si es necesario */
+  text-align: center;
+}
+
+.brandDot {
+  color: #00e5ff;
+  -webkit-text-fill-color: #00e5ff;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; box-shadow: 0 0 0 0 rgba(0, 255, 136, 0.4); }
+  70% { opacity: 0.7; box-shadow: 0 0 0 6px rgba(0, 255, 136, 0); }
+  100% { opacity: 1; box-shadow: 0 0 0 0 rgba(0, 255, 136, 0); }
+}
+
+@media (max-width: 768px) {
+
+  .navContainer { 
+    top: 15px; /* Un poco más arriba */
+    width: 92%; 
+    gap: 1.5rem; /* Menos espacio entre la pastilla y el título */
+  }
+
+  /* 1. Ajuste de la Isla */
+  .glassIsland {
+    padding: 6px; 
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* 2. Ocultamos elementos no esenciales */
+  .statusPod, .logo { display: none; }
+
+  /* 3. Links deslizables */
+  .navLinks {
+    width: 100%;
+    justify-content: space-between;
+    background: transparent;
+    padding: 0;
+    overflow-x: auto; /* Scroll horizontal si hace falta */
+    gap: 5px;
+  }
+  
+  .linkItem {
+    padding: 8px 0;
+    flex: 1;
+    text-align: center;
+    font-size: 0.8rem;
+  }
+
+  /* 4. Título COMPACTO */
+  .brandTitle {
+    font-size: 1.5rem; /* Más pequeño para que no moleste */
+    margin: 0;         /* Quitamos márgenes extra */
+    margin-top: 5px;   /* Apenas separado de la barra */
+    
+    /* Fondo oscuro semitransparente para que se lea si pasa sobre algo */
+    text-shadow: 0 10px 20px rgba(0,0,0,0.8); 
+  }
+}

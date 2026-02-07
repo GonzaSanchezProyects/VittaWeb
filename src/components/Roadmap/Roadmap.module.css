@@ -1,0 +1,112 @@
+.section {
+  padding: 120px 20px;
+  background: #050505;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 80px;
+  max-width: 600px;
+  z-index: 2;
+}
+
+.label {
+  color: var(--accent-color);
+  font-family: monospace;
+  font-size: 0.9rem;
+  letter-spacing: 0.2em;
+  margin-bottom: 15px;
+  display: block;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.timelineContainer {
+  position: relative;
+  max-width: 800px;
+  width: 100%;
+}
+
+/* La línea base (gris oscura) */
+.lineBase {
+  position: absolute;
+  left: 20px; /* Alineada con los iconos */
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: #222;
+  z-index: 1;
+}
+
+/* La línea activa (iluminada) */
+.lineProgress {
+  position: absolute;
+  left: 20px;
+  top: 0;
+  width: 2px;
+  background: var(--accent-color);
+  box-shadow: 0 0 15px var(--accent-color);
+  z-index: 2;
+  transform-origin: top; /* Crece desde arriba */
+}
+
+.stepItem {
+  position: relative;
+  padding-left: 80px; /* Espacio para la línea e icono */
+  margin-bottom: 80px;
+  opacity: 0.3; /* Tenue por defecto */
+  transition: opacity 0.5s ease;
+}
+
+.stepItem.active {
+  opacity: 1; /* Se ilumina al llegar */
+}
+
+.stepIcon {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 42px;
+  height: 42px;
+  background: #000;
+  border: 1px solid #333;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  font-weight: 700;
+  font-family: monospace;
+  z-index: 3;
+  transition: all 0.3s ease;
+}
+
+.stepItem.active .stepIcon {
+  border-color: var(--accent-color);
+  color: var(--accent-color);
+  background: rgba(0, 229, 255, 0.1);
+  box-shadow: 0 0 20px rgba(0, 229, 255, 0.2);
+}
+
+.stepContent h3 {
+  font-size: 1.5rem;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.stepContent p {
+  color: #888;
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .stepContent h3 { font-size: 1.25rem; }
+}
