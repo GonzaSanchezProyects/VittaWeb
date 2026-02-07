@@ -19,10 +19,38 @@ export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
     default: "Vitta Studio | Ingeniería Web de Alto Rendimiento",
-    template: "%s | Vitta Studio",
+    template: "%s | Vitta Studio" 
   },
-  description: "Estudio de desarrollo web especializado en Next.js...",
-  // ... (resto de tu metadata igual) ...
+  description: "Estudio de desarrollo web especializado en Next.js, SEO técnico y experiencias digitales escalables. Diseño web premium en Argentina y el mundo.",
+  keywords: ["Desarrollo Web", "Next.js", "Agencia SEO", "Diseño Web Mendoza", "Software a Medida"],
+  authors: [{ name: "Gonzalo Sanchez" }],
+  creator: "Vitta Studio",
+  openGraph: {
+    title: "Vitta Studio | Ingeniería Web",
+    description: "Desarrollo de software a medida para empresas que buscan liderar su mercado.",
+    url: baseUrl,
+    siteName: "Vitta Studio",
+    images: [
+      {
+        url: "/og-image.jpg", 
+        width: 1200,
+        height: 630,
+      },
+    ],
+    locale: "es_AR",
+    type: "website",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
 };
 
 export default function RootLayout({

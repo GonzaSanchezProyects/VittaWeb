@@ -1,18 +1,18 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { usePathname } from 'next/navigation'; // <--- 1. Importamos el hook de rutas
-import { m, useMotionValue, useSpring, Variants } from 'framer-motion';
+import { usePathname } from 'next/navigation';
+// 1. CAMBIO IMPORTANTE: Usamos 'motion' en lugar de 'm'
+import { motion, useMotionValue, useSpring, Variants } from 'framer-motion';
 import styles from './Cursor.module.css';
 
 export default function Cursor() {
-  // 2. Detectamos en qué página estamos
   const pathname = usePathname();
   
-  // 3. Condición: Si la URL contiene "/servicios/", es true
+  // Si quieres que funcione en todas partes por ahora, comenta esta línea para probar
   const isServicePage = pathname?.includes('/servicios/');
 
   const [isHovering, setIsHovering] = useState(false);
-  const [isVisible, setIsVisible] = useState(false); // Para evitar flash inicial
+  const [isVisible, setIsVisible] = useState(false);
 
   const mouseX = useMotionValue(-100);
   const mouseY = useMotionValue(-100);
@@ -25,16 +25,15 @@ export default function Cursor() {
     const moveCursor = (e: MouseEvent) => {
       mouseX.set(e.clientX);
       mouseY.set(e.clientY);
+      // Solo hacemos visible el cursor cuando el usuario mueve el mouse por primera vez
       if (!isVisible) setIsVisible(true);
     };
 
     const handleMouseOver = (e: MouseEvent) => {
-      // Verificación de seguridad por si e.target es null
       if (!e.target) return;
       
       const target = e.target as HTMLElement;
       
-      // Lógica para detectar elementos clickeables
       const isClickable = 
         target.tagName === 'BUTTON' ||
         target.tagName === 'A' ||
@@ -51,14 +50,10 @@ export default function Cursor() {
       window.removeEventListener('mousemove', moveCursor);
       window.removeEventListener('mouseover', handleMouseOver);
     };
-  }, [mouseX, mouseY, isVisible]);
+  }, [mouseX, mouseY, isVisible]); // isVisible añadido a dependencias
 
-  // --- 4. EL INTERRUPTOR MÁGICO ---
-  // Si estamos en una página de servicios, retornamos NULL.
-  // Esto hace que el componente NO se renderice y NO inyecte el estilo que oculta el mouse.
   if (isServicePage) return null;
 
-  // Variantes de animación (Tus estilos originales)
   const spinnerVariants: Variants = {
     normal: { scale: 1, opacity: 0.7, borderStyle: 'dashed' },
     hover: { scale: 0.5, opacity: 1, borderStyle: 'solid', borderColor: '#fff', borderWidth: '3px' }
@@ -75,35 +70,37 @@ export default function Cursor() {
 
   return (
     <>
-      {/* 5. ESTILO CONDICIONAL: 
-          Solo ocultamos el mouse nativo si este componente se está renderizando.
-          Al hacer "return null" arriba, esta etiqueta <style> desaparece y vuelve el mouse normal.
-      */}
       <style jsx global>{`
-        * { cursor: none !important; }
-        body, html, a, button, input { cursor: none !important; }
+        /* IMPORTANTE: Agregamos 'body' para asegurar que oculte el nativo */
+        body, html, a, button, input { 
+            cursor: none !important; 
+        }
       `}</style>
 
       <div 
         className={styles.cursorContainer}
+        // Usamos una clase condicional para la opacidad si prefieres, 
+        // pero inline style está bien para esto.
         style={{ opacity: isVisible ? 1 : 0 }}
       >
         
+        {/* 2. CAMBIO IMPORTANTE: <motion.div> en vez de <m.div> */}
+        
         {/* CAPA 1: El Núcleo */}
-        <m.div 
+        <motion.div 
           className={styles.follower}
           style={{ x: mouseX, y: mouseY }}
         >
           <div className={styles.core} />
-        </m.div>
+        </motion.div>
 
         {/* CAPA 2: El Mecanismo Pesado */}
-        <m.div 
+        <motion.div 
           className={styles.follower}
           style={{ x: springX, y: springY }}
         >
           {/* El Rotor Giratorio */}
-          <m.div 
+          <motion.div 
             className={styles.spinnerRing}
             variants={spinnerVariants}
             animate={isHovering ? "hover" : "normal"}
@@ -111,7 +108,7 @@ export default function Cursor() {
           />
 
           {/* Las Miras de Bloqueo */}
-          <m.div 
+          <motion.div 
             className={styles.lockBrackets}
             variants={bracketVariants}
             initial="normal"
@@ -121,8 +118,8 @@ export default function Cursor() {
             <div className={`${styles.bracket} ${styles.topRight}`} />
             <div className={`${styles.bracket} ${styles.bottomLeft}`} />
             <div className={`${styles.bracket} ${styles.bottomRight}`} />
-          </m.div>
-        </m.div>
+          </motion.div>
+        </motion.div>
 
       </div>
     </>
