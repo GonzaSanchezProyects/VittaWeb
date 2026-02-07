@@ -1,5 +1,6 @@
 'use client';
-import { m } from 'framer-motion'; // Usamos 'm' en lugar de 'motion'
+import { m } from 'framer-motion';
+import Link from 'next/link'; // Importamos Link
 import styles from './Hero.module.css';
 import MagneticButton from '../MagneticButton/MagneticButton';
 
@@ -17,8 +18,6 @@ export default function Hero() {
       
       <div className={styles.contentWrapper}>
 
-        
-        
         <m.div 
           className={styles.label}
           initial={{ opacity: 0, y: -20 }}
@@ -65,8 +64,16 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 2 }}
         >
-          <MagneticButton>Solicitar Asesoría</MagneticButton>
-          <MagneticButton>Ver Otros Proyectos</MagneticButton>
+          {/* BOTÓN 1: Ir a Contacto (ID #contacto) */}
+          <Link href="#contacto" style={{ textDecoration: 'none' }}>
+            <MagneticButton>Solicitar Asesoría</MagneticButton>
+          </Link>
+
+          {/* BOTÓN 2: Ir a Proyectos (ID #work) */}
+          <Link href="#work" style={{ textDecoration: 'none' }}>
+            <MagneticButton>Ver Proyectos</MagneticButton>
+          </Link>
+          
         </m.div>
 
       </div>

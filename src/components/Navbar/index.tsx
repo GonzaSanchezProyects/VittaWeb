@@ -79,7 +79,7 @@ export default function Navbar() {
                 width={40}       // ANCHO REAL de tu imagen (cámbialo al correcto)
                 height={40}       // ALTO REAL de tu imagen
                 priority          // ¡CRUCIAL! Esto le dice a Google "carga esto primero"
-                quality={100}     // Para que el logo se vea nítido
+                quality={75}     // Para que el logo se vea nítido
               />
               
               {/* El punto cian */}

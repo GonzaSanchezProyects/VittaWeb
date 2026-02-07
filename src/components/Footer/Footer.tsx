@@ -1,5 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
+import Link from 'next/link'; // <--- Importamos Link
 import { m } from 'framer-motion';
 import styles from './Footer.module.css';
 
@@ -22,20 +23,6 @@ export default function Footer() {
       
       <div className={styles.container}>
         
-        {/* 1. CABECERA: CTA SUTIL */}
-        <div className={styles.topRow}>
-          <div className={styles.ctaTextWrapper}>
-            <h3 className={styles.ctaLabel}>¿Listo para empezar?</h3>
-            <h2 className={styles.ctaTitle}>Hablemos de tu proyecto.</h2>
-          </div>
-          <m.button 
-            className={styles.ctaButton}
-            whileHover={{ scale: 1.02, backgroundColor: "#fff", color: "#000" }}
-            whileTap={{ scale: 0.98 }}
-          >
-            Iniciar Conversación
-          </m.button>
-        </div>
 
         <div className={styles.separator} />
 

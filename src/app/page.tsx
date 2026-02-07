@@ -5,7 +5,6 @@ import Services from "@/components/Services/Services";
 import Work from "@/components/Work/Work";
 import Contact from "@/components/Contact/Contact";
 import Spotlight from "@/components/Spotlight/Spotlight";
-import Cursor from "@/components/Cursor/Cursor";
 import GrowthMonitor from "@/components/GrowthMonitor/GrowthMonitor";
 import Roadmap from "@/components/Roadmap/Roadmap";
 import Background from "@/components/Background/Background";
@@ -15,7 +14,6 @@ export default function Home() {
   return (
     <main style={{ position: 'relative', overflow: 'visible' }}>
       
-      <Cursor />
       <Spotlight />
 
       {/* 1. FONDO PLASMA GLOBAL (Detrás de todo el bloque superior) */}
