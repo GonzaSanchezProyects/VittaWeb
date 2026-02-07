@@ -1,16 +1,14 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
-// 1. CAMBIO IMPORTANTE: Usamos 'motion' en lugar de 'm'
-import { motion, useMotionValue, useSpring, Variants } from 'framer-motion';
+// 1. Importamos LazyMotion y domAnimation junto con 'm'
+import { m, useMotionValue, useSpring, LazyMotion, domAnimation, Variants } from 'framer-motion';
 import styles from './Cursor.module.css';
 
 export default function Cursor() {
   const pathname = usePathname();
-  
-  // Si quieres que funcione en todas partes por ahora, comenta esta línea para probar
   const isServicePage = pathname?.includes('/servicios/');
-
+  
   const [isHovering, setIsHovering] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -25,13 +23,11 @@ export default function Cursor() {
     const moveCursor = (e: MouseEvent) => {
       mouseX.set(e.clientX);
       mouseY.set(e.clientY);
-      // Solo hacemos visible el cursor cuando el usuario mueve el mouse por primera vez
       if (!isVisible) setIsVisible(true);
     };
 
     const handleMouseOver = (e: MouseEvent) => {
       if (!e.target) return;
-      
       const target = e.target as HTMLElement;
       
       const isClickable = 
@@ -50,7 +46,7 @@ export default function Cursor() {
       window.removeEventListener('mousemove', moveCursor);
       window.removeEventListener('mouseover', handleMouseOver);
     };
-  }, [mouseX, mouseY, isVisible]); // isVisible añadido a dependencias
+  }, [mouseX, mouseY, isVisible]);
 
   if (isServicePage) return null;
 
@@ -69,38 +65,34 @@ export default function Cursor() {
   };
 
   return (
-    <>
+    // 2. ENVOLVEMOS TODO EN LazyMotion
+    // Esto hace que 'm.div' funcione sin necesidad de un proveedor externo
+    <LazyMotion features={domAnimation}>
       <style jsx global>{`
-        /* IMPORTANTE: Agregamos 'body' para asegurar que oculte el nativo */
-        body, html, a, button, input { 
-            cursor: none !important; 
-        }
+        body, html, a, button, input { cursor: none !important; }
       `}</style>
 
       <div 
         className={styles.cursorContainer}
-        // Usamos una clase condicional para la opacidad si prefieres, 
-        // pero inline style está bien para esto.
         style={{ opacity: isVisible ? 1 : 0 }}
       >
-        
-        {/* 2. CAMBIO IMPORTANTE: <motion.div> en vez de <m.div> */}
+        {/* Ahora sí podemos usar 'm.div' (versión ligera) */}
         
         {/* CAPA 1: El Núcleo */}
-        <motion.div 
+        <m.div 
           className={styles.follower}
           style={{ x: mouseX, y: mouseY }}
         >
           <div className={styles.core} />
-        </motion.div>
+        </m.div>
 
         {/* CAPA 2: El Mecanismo Pesado */}
-        <motion.div 
+        <m.div 
           className={styles.follower}
           style={{ x: springX, y: springY }}
         >
           {/* El Rotor Giratorio */}
-          <motion.div 
+          <m.div 
             className={styles.spinnerRing}
             variants={spinnerVariants}
             animate={isHovering ? "hover" : "normal"}
@@ -108,7 +100,7 @@ export default function Cursor() {
           />
 
           {/* Las Miras de Bloqueo */}
-          <motion.div 
+          <m.div 
             className={styles.lockBrackets}
             variants={bracketVariants}
             initial="normal"
@@ -118,10 +110,10 @@ export default function Cursor() {
             <div className={`${styles.bracket} ${styles.topRight}`} />
             <div className={`${styles.bracket} ${styles.bottomLeft}`} />
             <div className={`${styles.bracket} ${styles.bottomRight}`} />
-          </motion.div>
-        </motion.div>
+          </m.div>
+        </m.div>
 
       </div>
-    </>
+    </LazyMotion>
   );
 }
