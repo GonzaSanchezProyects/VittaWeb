@@ -1,156 +1,169 @@
+/* src/components/GrowthMonitor/GrowthMonitor.tsx */
 'use client';
-import { useInView, useSpring, useTransform, m } from 'framer-motion';
-import { useEffect, useRef, useState } from 'react';
+import { useRef } from 'react';
+import { useInView, motion, useSpring, useTransform } from 'framer-motion';
 import styles from './GrowthMonitor.module.css';
 
-// Componente Counter con protección 'notranslate'
-function Counter({ value, unit = "", prefix = "" }) {
+// 1. DEFINIMOS LA INTERFAZ PARA LOS PROPS
+interface CounterProps {
+  value: number;
+  unit?: string;
+  prefix?: string;
+}
+
+// 2. APLICAMOS EL TIPO AL COMPONENTE
+function Counter({ value, unit = "", prefix = "" }: CounterProps) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
   
-  // Ajusté la duración a 2.5s para que se aprecie la subida
-  const springValue = useSpring(0, { duration: 2500, bounce: 0 });
-  const displayValue = useTransform(springValue, (current) => Math.round(current));
-  const [display, setDisplay] = useState(0);
+  const spring = useSpring(0, { mass: 0.8, stiffness: 75, damping: 15 });
+  const display = useTransform(spring, (current) => Math.round(current));
 
-  useEffect(() => {
-    if (isInView) {
-      springValue.set(value);
-    }
-  }, [isInView, value, springValue]);
-
-  useEffect(() => {
-    const unsubscribe = displayValue.on("change", (latest) => {
-      setDisplay(latest);
-    });
-    return () => unsubscribe();
-  }, [displayValue]);
+  if (isInView) {
+    spring.set(value);
+  }
 
   return (
-    // AQUI ESTÁ LA CLAVE: 'notranslate' y translate="no"
-    <span 
-      ref={ref} 
-      className={`${styles.counterWrapper} notranslate`} 
-      translate="no"
-    >
-      {prefix}{display}<span className={styles.metricUnit}>{unit}</span>
+    <span ref={ref} className="notranslate" translate="no">
+      {prefix}
+      <motion.span>{display}</motion.span>
+      {unit}
     </span>
   );
 }
 
 export default function GrowthMonitor() {
   return (
-    <section className={styles.section}>
+    <section className={styles.monitorSection}>
       <div className={styles.container}>
         
-        <div className={styles.textContent}>
-          <span className={styles.label}>DOMINIO EN GOOGLE</span>
-          <h2 className={styles.title}>
-            De nada sirve una web <br/>
-            <span className={styles.highlightText}>que nadie visita.</span>
-          </h2>
-          <p className={styles.description}>
-            La mayoría de las webs son desiertos digitales. Nosotros construimos 
-            autopistas. Con una arquitectura <strong>SEO-First</strong>, hacemos que 
-            su negocio aparezca justo cuando sus clientes lo están buscando.
-            Sin pagar publicidad.
+        <div className={styles.header}>
+          <h2 className={styles.title}>Resultados que se ven en el banco.</h2>
+          <p className={styles.subtitle}>
+            El código limpio no es solo estética. Es velocidad, posicionamiento y ventas.
           </p>
-          
-          <div className={styles.trustBadge}>
-            <div className={styles.greenDot}></div>
-            <span>Estrategias indexables por Google 2024</span>
-          </div>
         </div>
 
-        <div className={styles.metricsGrid}>
-          
-          {/* TARJETA 1: TRÁFICO */}
-          <div className={`${styles.card} ${styles.cardFeatured}`}>
-            <span className={styles.metricTitle}>Visitas Orgánicas / Mes</span>
-            <div className={styles.metricValueContainer}>
-              <Counter value={15} unit="k" prefix="+" />
-            </div>
-            <p className={styles.metricSub}>Clientes potenciales gratis</p>
-            
-            <svg className={styles.chartSvg} viewBox="0 0 100 40" preserveAspectRatio="none">
-              <m.path 
-                d="M0 35 Q 20 35 30 25 T 60 15 T 100 5" 
-                fill="none" 
-                stroke="url(#gradientTraffic)" 
-                strokeWidth="3"
-                initial={{ pathLength: 0 }}
-                whileInView={{ pathLength: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 2, ease: "easeInOut" }}
-              />
-              <defs>
-                <linearGradient id="gradientTraffic" x1="0" y1="0" x2="1" y2="0">
-                  <stop offset="0%" stopColor="#00e5ff" stopOpacity="0.2"/>
-                  <stop offset="100%" stopColor="#00e5ff"/>
-                </linearGradient>
-              </defs>
-            </svg>
-          </div>
-
-          {/* TARJETA 2: VELOCIDAD */}
+        <div className={styles.grid}>
+          {/* CARD 1: TRÁFICO */}
           <div className={styles.card}>
-            <span className={styles.metricTitle}>Velocidad de Carga</span>
-             <div className={styles.metricValueContainer}>
-              <Counter value={99} unit="/100" />
+            <div className={styles.chartContainer}>
+               {/* Gráfico de línea simple con SVG */}
+               <svg viewBox="0 0 100 40" className={styles.chart}>
+                 <motion.path 
+                   d="M0 35 Q 25 35, 35 20 T 70 15 T 100 5" 
+                   fill="none" 
+                   stroke="#00e5ff" 
+                   strokeWidth="2"
+                   initial={{ pathLength: 0 }}
+                   whileInView={{ pathLength: 1 }}
+                   transition={{ duration: 1.5, ease: "easeInOut" }}
+                 />
+                 <linearGradient id="gradient1" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor="rgba(0, 229, 255, 0.2)" />
+                    <stop offset="100%" stopColor="rgba(0, 229, 255, 0)" />
+                 </linearGradient>
+                 <motion.path 
+                   d="M0 35 Q 25 35, 35 20 T 70 15 T 100 5 V 40 H 0 Z" 
+                   fill="url(#gradient1)" 
+                   initial={{ opacity: 0 }}
+                   whileInView={{ opacity: 1 }}
+                   transition={{ delay: 0.5, duration: 1 }}
+                 />
+               </svg>
             </div>
-            <p className={styles.metricSub}>Google premia la rapidez</p>
-             <svg className={styles.chartSvg} viewBox="0 0 100 30" preserveAspectRatio="none">
-              <m.path 
-                d="M0 20 L 100 20" 
-                fill="none" 
-                stroke="#4ade80" 
-                strokeWidth="2"
-                strokeDasharray="5,5"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 0.5 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.5 }}
-              />
-            </svg>
+            <div className={styles.metric}>
+              <h3>
+                <Counter value={15} prefix="+" unit="k" />
+              </h3>
+              <p>Visitas Orgánicas / Mes</p>
+            </div>
           </div>
 
-          {/* TARJETA 3: CONVERSIÓN */}
+          {/* CARD 2: VELOCIDAD */}
           <div className={styles.card}>
-            <span className={styles.metricTitle}>Tasa de Conversión</span>
-             <div className={styles.metricValueContainer}>
-              <Counter value={300} unit="%" prefix="+" />
+            <div className={styles.chartContainer}>
+               <div className={styles.speedCircle}>
+                 <svg viewBox="0 0 36 36">
+                   <path
+                     d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                     fill="none"
+                     stroke="rgba(255, 255, 255, 0.1)"
+                     strokeWidth="2"
+                   />
+                   <motion.path
+                     d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                     fill="none"
+                     stroke="#00ff88"
+                     strokeWidth="2"
+                     strokeDasharray="100, 100"
+                     initial={{ pathLength: 0 }}
+                     whileInView={{ pathLength: 0.99 }}
+                     transition={{ duration: 1.5, ease: "easeOut" }}
+                   />
+                 </svg>
+                 <div className={styles.circleText}>
+                    <span className="notranslate" translate="no">99</span>
+                 </div>
+               </div>
             </div>
-            <p className={styles.metricSub}>Visitantes que compran</p>
-            <svg className={styles.chartSvg} viewBox="0 0 100 40" preserveAspectRatio="none">
-               <m.path 
-                d="M0 35 L 20 30 L 40 32 L 60 15 L 80 20 L 100 2" 
-                fill="none" 
-                stroke="#a855f7" 
-                strokeWidth="2"
-                initial={{ pathLength: 0 }}
-                whileInView={{ pathLength: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 1.5, delay: 0.2 }}
-              />
-            </svg>
+            <div className={styles.metric}>
+              <h3>Google PageSpeed</h3>
+              <p>Carga Instantánea (&lt;1s)</p>
+            </div>
           </div>
 
-           {/* TARJETA 4: INDEXACIÓN */}
-           <div className={styles.card}>
-            <span className={styles.metricTitle}>Visibilidad Web</span>
-             <div className={styles.metricValueContainer}>
-               {/* Agregamos notranslate aquí también por si acaso */}
-              <span className={`${styles.staticText} notranslate`} translate="no">Top 3</span>
+          {/* CARD 3: CONVERSIÓN */}
+          <div className={styles.card}>
+            <div className={styles.chartContainer}>
+               <svg viewBox="0 0 100 40" className={styles.chart}>
+                 <motion.rect 
+                   x="10" y="20" width="10" height="20" fill="#333" 
+                   initial={{ height: 0, y: 40 }}
+                   whileInView={{ height: 20, y: 20 }}
+                   transition={{ duration: 0.5 }}
+                 />
+                 <motion.rect 
+                   x="30" y="15" width="10" height="25" fill="#444" 
+                   initial={{ height: 0, y: 40 }}
+                   whileInView={{ height: 25, y: 15 }}
+                   transition={{ duration: 0.5, delay: 0.1 }}
+                 />
+                 <motion.rect 
+                   x="50" y="25" width="10" height="15" fill="#333" 
+                   initial={{ height: 0, y: 40 }}
+                   whileInView={{ height: 15, y: 25 }}
+                   transition={{ duration: 0.5, delay: 0.2 }}
+                 />
+                 <motion.rect 
+                   x="70" y="5" width="10" height="35" fill="#00e5ff" 
+                   initial={{ height: 0, y: 40 }}
+                   whileInView={{ height: 35, y: 5 }}
+                   transition={{ duration: 0.5, delay: 0.3 }}
+                 />
+               </svg>
             </div>
-            <p className={styles.metricSub}>Resultados de búsqueda</p>
-             <div className={styles.rankBars}>
-               <m.div className={styles.bar} initial={{height: 10}} whileInView={{height: 20}} transition={{delay:0.5}} />
-               <m.div className={styles.bar} initial={{height: 10}} whileInView={{height: 35}} transition={{delay:0.6}} />
-               <m.div className={`${styles.bar} ${styles.activeBar}`} initial={{height: 10}} whileInView={{height: 50}} transition={{delay:0.7}} />
+            <div className={styles.metric}>
+              <h3>
+                 <Counter value={300} prefix="+" unit="%" />
+              </h3>
+              <p>Tasa de Conversión</p>
+            </div>
+          </div>
+
+          {/* CARD 4: RANKING */}
+          <div className={styles.card}>
+             <div className={styles.rankBadge}>
+                <span className="notranslate" translate="no">#1</span>
              </div>
+             <div className={styles.metric}>
+              <h3>Top 3</h3>
+              <p>En Keywords Locales</p>
+            </div>
           </div>
 
         </div>
+
       </div>
     </section>
   );
