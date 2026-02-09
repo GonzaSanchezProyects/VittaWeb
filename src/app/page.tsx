@@ -12,23 +12,57 @@ import Footer from "@/components/Footer/Footer";
 import About from "@/components/About/About";
 
 export default function Home() {
+  // Datos Estructurados para Google (SEO Local)
+  const businessSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'ProfessionalService',
+    name: 'Vitta Web',
+    image: 'https://vittaweb.site/og-image.jpg',
+    '@id': 'https://vittaweb.site',
+    url: 'https://vittaweb.site',
+    telephone: '+5492634665431', // REEMPLAZA CON TU NÚMERO REAL
+    priceRange: '$$',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: 'San Martín',
+      addressLocality: 'San Martín',
+      addressRegion: 'Mendoza',
+      postalCode: '5570',
+      addressCountry: 'AR'
+    },
+    geo: {
+      '@type': 'GeoCoordinates',
+      latitude: -33.083, 
+      longitude: -68.476
+    },
+    sameAs: [
+      'https://www.linkedin.com/in/tu-perfil',
+      'https://www.instagram.com/tu-instagram'
+    ]
+  };
+
   return (
     <main style={{ position: 'relative', overflow: 'visible' }}>
       
+      {/* SCRIPT INVISIBLE PARA GOOGLE */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(businessSchema) }}
+      />
+      
       <Spotlight />
 
-      {/* 1. FONDO PLASMA GLOBAL (Detrás de todo el bloque superior) */}
+      {/* 1. FONDO PLASMA GLOBAL */}
       <div style={{ 
         position: 'absolute', 
         top: 0, 
         left: 0, 
         width: '100%', 
-        height: '150vh', /* Cubre Hero + un poco más */
+        height: '150vh',
         zIndex: 0, 
         overflow: 'hidden' 
       }}>
           <Background />
-          {/* Degradado final del plasma para que muera en negro suavemente */}
           <div style={{
             position: 'absolute',
             bottom: 0,
@@ -44,35 +78,28 @@ export default function Home() {
       <div style={{ position: 'relative', zIndex: 1 }}>
         <Hero />
       </div>
-      
 
-      {/* 3. TECH STREAM CON SU PROPIO DEGRADADO */}
+      {/* 3. TECH STREAM */}
       <div style={{ position: 'relative', zIndex: 1, marginTop: '-20px' }}>
-        
-        {/* El componente */}
         <TechStream />
-
-        
-        {/* MÁSCARA LOCAL: Solo oscurece la parte de abajo de ESTA franja */}
         <div style={{
           position: 'absolute',
           bottom: 0,
           left: 0,
           width: '100%',
-          height: '80px', /* Altura pequeña para no tapar el texto */
+          height: '80px',
           pointerEvents: 'none',
           zIndex: 2
         }} />
       </div>
 
-      {/* 4. RESTO DE LA WEB (Fondo Negro Sólido) */}
+      {/* 4. RESTO DE LA WEB */}
       <div style={{ 
         position: 'relative', 
         zIndex: 2, 
         backgroundColor: '#050505', 
-        paddingTop: '50px' /* Espacio para respirar */
-      }}>
-          
+        paddingTop: '50px' 
+      }}> 
          <GrowthMonitor />
          <About />
          <Services />
@@ -81,8 +108,6 @@ export default function Home() {
          <Contact />
          <Footer />
       </div>
-      
-      
     </main>
   );
 }

@@ -8,8 +8,6 @@ import Navbar from "../components/Navbar/index";
 import JsonLd from "../components/JsonLd/JsonLd";
 import { Analytics } from "@vercel/analytics/next";
 import GoogleTranslate from "@/components/GoogleTranslate/GoogleTranslate";
-
-// IMPORTAMOS EL COMPONENTE CLIENTE QUE CREAMOS EN EL PASO 1
 import ClientCursor from "@/components/ClientCursor"; 
 
 const manrope = Manrope({ subsets: ["latin"] });
@@ -24,11 +22,15 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: '/',
+    languages: {
+      'es-AR': '/',
+    },
   },
   description: "Estudio de desarrollo web especializado en Next.js, SEO técnico y experiencias digitales escalables. Diseño web premium en Argentina y el mundo.",
-  keywords: ["Desarrollo Web", "Next.js", "Agencia SEO", "Diseño Web Mendoza", "Software a Medida"],
-  authors: [{ name: "Gonzalo Sanchez" }],
+  keywords: ["Desarrollo Web", "Next.js", "Agencia SEO", "Diseño Web Mendoza", "Software a Medida", "Programación Web", "Vitta Web"],
+  authors: [{ name: "Gonzalo Sanchez", url: baseUrl }],
   creator: "Vitta Studio",
+  publisher: "Vitta Studio",
   openGraph: {
     title: "Vitta Studio | Ingeniería Web",
     description: "Desarrollo de software a medida para empresas que buscan liderar su mercado.",
@@ -39,6 +41,7 @@ export const metadata: Metadata = {
         url: "/og-image.jpg", 
         width: 1200,
         height: 630,
+        alt: "Vitta Studio Preview",
       },
     ],
     locale: "es_AR",
@@ -55,6 +58,10 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
+  // Opcional: Para verificar Search Console
+  verification: {
+    google: 'TU_CODIGO_DE_VERIFICACION', 
+  },
 };
 
 export default function RootLayout({
@@ -67,8 +74,6 @@ export default function RootLayout({
       <body className={manrope.className}>
         <JsonLd />
         <Analytics />
-
-        {/* Aquí usamos el componente puente, sin configuraciones extra */}
         <ClientCursor />
         <GoogleTranslate />
         <MotionProvider>
