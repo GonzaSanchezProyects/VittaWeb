@@ -5,7 +5,19 @@ export default function GoogleTranslate() {
   const [currentLang, setCurrentLang] = useState('es');
 
   useEffect(() => {
-    // 1. CARGAR SCRIPT DE GOOGLE
+    // 1. Inyectar estilos CSS para ocultar la barra de Google (Método Seguro)
+    const style = document.createElement('style');
+    style.innerHTML = `
+      body { top: 0px !important; }
+      .goog-te-banner-frame { display: none !important; visibility: hidden !important; }
+      .skiptranslate { display: none !important; visibility: hidden !important; }
+      #google_translate_element { display: none !important; }
+      .goog-tooltip { display: none !important; }
+      .goog-text-highlight { background: none !important; box-shadow: none !important; }
+    `;
+    document.head.appendChild(style);
+
+    // 2. Inicializar Google Translate
     // @ts-ignore
     window.googleTranslateElementInit = function () {
       // @ts-ignore
@@ -19,6 +31,7 @@ export default function GoogleTranslate() {
       );
     };
 
+    // 3. Cargar el script solo si no existe
     const scriptId = 'google-translate-script';
     if (!document.getElementById(scriptId)) {
       const script = document.createElement('script');
@@ -28,53 +41,34 @@ export default function GoogleTranslate() {
       document.body.appendChild(script);
     }
 
-    // 2. DETECCIÓN AUTOMÁTICA (AUTO-DETECT)
+    // 4. Chequear estado actual (Visual)
+    const match = document.cookie.match(/googtrans=\/es\/(en|es)/);
+    if (match && match[1]) {
+        setCurrentLang(match[1]);
+    } 
+
+    // 5. DETECCIÓN AUTOMÁTICA (Una sola vez)
     const hasCookie = document.cookie.match(/googtrans=/);
-    
-    // Si NO hay cookie (es la primera vez que entra el usuario)
     if (!hasCookie) {
-        // Detectamos el idioma del navegador
         const browserLang = navigator.language; 
-        
-        // Si el navegador está en Inglés (en-US, en-GB, etc.)
         if (browserLang.startsWith('en')) {
-            // FORZAMOS LA TRADUCCIÓN A INGLÉS
-            document.cookie = `googtrans=/es/en; path=/; domain=${window.location.hostname}`;
-            // Recargamos para aplicar
-            window.location.reload();
-        } else {
-            // Si es español u otro, marcamos español por defecto para no volver a chequear
-            // (Opcional, pero ayuda a mantener la consistencia)
-             document.cookie = `googtrans=/es/es; path=/; domain=${window.location.hostname}`;
-        }
-    } else {
-        // Si YA hay cookie, actualizamos el estado visual de los botones
-        const match = document.cookie.match(/googtrans=\/es\/(en|es)/);
-        if (match && match[1]) {
-            setCurrentLang(match[1]);
+             console.log("Detectado Inglés: Activando traducción...");
+             setTranslationCookie('en');
         }
     }
 
-    // 3. EL EXTERMINADOR (Limpieza de la barra fea de Google)
-    const intervalId = setInterval(() => {
-      const body = document.body;
-      if (body.style.top && body.style.top !== '0px') {
-        body.style.top = '0px';
-        body.style.position = 'static';
-      }
-      const banner = document.querySelector('.goog-te-banner-frame');
-      const skiptranslate = document.querySelector('body > .skiptranslate');
-      if (banner) banner.remove();
-      if (skiptranslate) skiptranslate.remove();
-    }, 100);
-
-    setTimeout(() => clearInterval(intervalId), 5000);
-    return () => clearInterval(intervalId);
   }, []);
 
-  const changeLanguage = (lang: 'es' | 'en') => {
+  // --- FUNCIÓN ROBUSTA PARA GUARDAR COOKIE ---
+  const setTranslationCookie = (lang: 'es' | 'en') => {
     const value = lang === 'en' ? '/es/en' : '/es/es';
+    
+    // Guardamos la cookie de varias formas para asegurar que agarre en localhost y producción
+    document.cookie = `googtrans=${value}; path=/`;
     document.cookie = `googtrans=${value}; path=/; domain=${window.location.hostname}`;
+    document.cookie = `googtrans=${value}; path=/; domain=.${window.location.hostname}`; // Con punto para subdominios
+
+    // Recargamos
     window.location.reload();
   };
 
@@ -82,54 +76,59 @@ export default function GoogleTranslate() {
     <>
       <div id="google_translate_element" style={{ display: 'none' }} />
 
-      {/* --- LA BURBUJA FLOTANTE (SOLO ESTO, SIN CARTEL) --- */}
+      {/* --- BURBUJA FLOTANTE --- */}
       <div 
         style={{
           position: 'fixed',
           bottom: '30px',
           right: '30px',
-          zIndex: 2147483647, // Z-Index máximo posible para asegurar que se vea
+          zIndex: 2147483647,
           display: 'flex',
           alignItems: 'center',
-          gap: '5px',
-          padding: '8px 16px',
-          background: 'rgba(10, 10, 10, 0.6)', 
-          backdropFilter: 'blur(12px)',        
+          gap: '8px', // Un poco más de espacio
+          padding: '10px 18px', // Un poco más grande para facilitar click
+          background: 'rgba(10, 10, 10, 0.75)', 
+          backdropFilter: 'blur(16px)',        
           borderRadius: '50px',
-          border: '1px solid rgba(255, 255, 255, 0.1)',
-          boxShadow: '0 10px 30px rgba(0,0,0,0.3)',
-          transition: 'all 0.3s ease'
+          border: '1px solid rgba(255, 255, 255, 0.15)',
+          boxShadow: '0 8px 32px rgba(0,0,0,0.4)',
+          transition: 'transform 0.2s ease',
+          cursor: 'default'
         }}
+        onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
+        onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
       >
         <button
-          onClick={() => changeLanguage('es')}
+          onClick={() => setTranslationCookie('es')}
           style={{
             background: 'transparent',
             border: 'none',
             color: currentLang === 'es' ? '#fff' : 'rgba(255,255,255,0.4)',
-            fontSize: '14px',
-            fontWeight: 700,
+            fontSize: '15px',
+            fontWeight: 800,
             cursor: 'pointer',
-            padding: '2px',
-            transition: 'color 0.2s'
+            padding: '4px',
+            transition: 'color 0.2s',
+            outline: 'none'
           }}
         >
           ES
         </button>
 
-        <div style={{ width: '1px', height: '12px', background: 'rgba(255,255,255,0.2)' }} />
+        <div style={{ width: '1px', height: '14px', background: 'rgba(255,255,255,0.2)' }} />
 
         <button
-          onClick={() => changeLanguage('en')}
+          onClick={() => setTranslationCookie('en')}
           style={{
             background: 'transparent',
             border: 'none',
             color: currentLang === 'en' ? '#fff' : 'rgba(255,255,255,0.4)',
-            fontSize: '14px',
-            fontWeight: 700,
+            fontSize: '15px',
+            fontWeight: 800,
             cursor: 'pointer',
-            padding: '2px',
-            transition: 'color 0.2s'
+            padding: '4px',
+            transition: 'color 0.2s',
+            outline: 'none'
           }}
         >
           EN
