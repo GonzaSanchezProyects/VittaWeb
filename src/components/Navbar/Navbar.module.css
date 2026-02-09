@@ -6,33 +6,35 @@
   top: 30px;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 100;
+  z-index: 1000;
   width: auto;
+  max-width: 90%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 1rem;
-  /* Evita que el contenedor capture clicks fuera de los elementos */
-  pointer-events: none; 
+  pointer-events: none; /* Permite clicks a través del área vacía */
 }
 
-/* La Isla de Vidrio */
+/* --- LA ISLA DE VIDRIO --- */
 .glassIsland {
   display: flex;
   align-items: center;
-  gap: 8px;
-  background: rgba(10, 10, 10, 0.7);
+  justify-content: space-between; /* Clave para separar logo y menú */
+  gap: 12px;
+  background: rgba(10, 10, 10, 0.6);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  padding: 6px 8px; /* Padding unificado */
+  padding: 6px 12px;
   border-radius: 100px;
   border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: 
     0 20px 40px rgba(0, 0, 0, 0.4),
     inset 0 0 0 1px rgba(255, 255, 255, 0.05);
   transition: all 0.3s ease;
-  pointer-events: auto; /* Reactivamos clicks en la barra */
+  pointer-events: auto; /* Reactivamos clicks */
+  min-width: 300px; /* Ancho mínimo para que no colapse */
 }
 
 .glassIsland:hover {
@@ -44,10 +46,9 @@
 
 /* --- LOGO --- */
 .logo {
-  padding-left: 12px;
-  padding-right: 8px;
   display: flex;
   align-items: center;
+  padding-right: 10px;
 }
 
 .logoLink {
@@ -56,14 +57,14 @@
   display: block;
 }
 
-/* --- LINKS --- */
-.navLinks {
+/* --- LINKS DESKTOP (Se ocultan en móvil) --- */
+.desktopLinks {
   display: flex;
-  position: relative;
+  align-items: center;
+  gap: 5px;
   background: rgba(255, 255, 255, 0.03);
   border-radius: 100px;
   padding: 4px;
-  padding-right: 1rem;
 }
 
 .linkItem {
@@ -77,7 +78,7 @@
   z-index: 2;
   border-radius: 100px;
   cursor: pointer;
-  white-space: nowrap; /* Evita que el texto se parta en dos líneas */
+  white-space: nowrap;
 }
 
 .linkItem:hover {
@@ -93,7 +94,7 @@
   border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-/* --- STATUS POD (Derecha) --- */
+/* --- STATUS POD (Reloj - Desktop) --- */
 .statusPod {
   display: flex;
   align-items: center;
@@ -120,20 +121,20 @@
   white-space: nowrap;
 }
 
-/* --- TÍTULO FLOTANTE --- */
+/* --- TÍTULO FLOTANTE (Desktop) --- */
 .brandTitle {
   font-size: 2.5rem;
   font-weight: 900;
-  margin: 0;
-  margin-top: 10px; /* Separación de la isla */
+  margin-top: 5px;
   letter-spacing: -0.04em;
   line-height: 1;
   background: linear-gradient(180deg, #FFFFFF 20%, #666666 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  background-clip: text;
-  pointer-events: auto; /* Reactivamos clicks si es necesario */
+  background-clip: text; /* Estándar */
+  pointer-events: none;
   text-align: center;
+  text-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
 
 .brandDot {
@@ -147,48 +148,130 @@
   100% { opacity: 1; box-shadow: 0 0 0 0 rgba(0, 255, 136, 0); }
 }
 
+/* =========================================
+   RESPONSIVE & MOBILE MENU
+   ========================================= */
+
+/* Botón Hamburguesa */
+.mobileToggle {
+  display: none; /* Oculto en desktop */
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px; /* Espacio exacto entre barras */
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  z-index: 1002;
+  width: 45px; /* Ancho fijo para evitar saltos */
+  height: 45px;
+}
+
+.bar {
+  width: 24px; /* Largo de la línea */
+  height: 2px; /* Grosor de la línea */
+  background-color: white;
+  border-radius: 4px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* Animación suave */
+  transform-origin: center; /* Clave para que giren sobre su eje */
+}
+
+/* --- ESTADO ABIERTO (LA "X" PERFECTA) --- */
+
+/* Barra 1: Baja 8px y rota 45 grados */
+/* (6px gap + 2px altura = 8px de viaje) */
+.mobileToggle.open .bar:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+/* Barra 2: Se desvanece y se mueve un poco a la izquierda */
+.mobileToggle.open .bar:nth-child(2) {
+  opacity: 0;
+  transform: translateX(-10px);
+}
+
+/* Barra 3: Sube 8px y rota -45 grados */
+.mobileToggle.open .bar:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+/* OVERLAY MENU FULLSCREEN */
+.mobileMenuOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(5, 5, 5, 0.98);
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  pointer-events: auto;
+}
+
+.mobileLinksContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  text-align: center;
+}
+
+.mobileLink {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: white;
+  text-decoration: none;
+  letter-spacing: -0.02em;
+  transition: color 0.3s;
+}
+
+.mobileLink:active {
+  color: #00e5ff;
+  transform: scale(0.95);
+}
+
+.pageIndicator {
+  font-size: 1.2rem;
+  color: #00e5ff;
+  vertical-align: top;
+  margin-left: 8px;
+}
+
+.mobileFooter {
+  position: absolute;
+  bottom: 40px;
+  text-align: center;
+  color: #666;
+  font-size: 0.85rem;
+  font-family: monospace;
+}
+
+/* --- MEDIA QUERIES (Mobile) --- */
 @media (max-width: 768px) {
-
-  .navContainer { 
-    top: 15px; /* Un poco más arriba */
-    width: 92%; 
-    gap: 1.5rem; /* Menos espacio entre la pastilla y el título */
+  .navContainer {
+    top: 20px;
+    width: 90%;
+    gap: 0; /* El título desaparece, no necesitamos gap */
   }
 
-  /* 1. Ajuste de la Isla */
   .glassIsland {
-    padding: 6px; 
     width: 100%;
-    justify-content: center;
+    justify-content: space-between; /* Logo izq, Hamburguesa der */
+    padding: 10px 20px;
   }
 
-  /* 2. Ocultamos elementos no esenciales */
-  .statusPod, .logo { display: none; }
-
-  /* 3. Links deslizables */
-  .navLinks {
-    width: 100%;
-    justify-content: space-between;
-    background: transparent;
-    padding: 0;
-    overflow-x: auto; /* Scroll horizontal si hace falta */
-    gap: 5px;
-  }
-  
-  .linkItem {
-    padding: 8px 0;
-    flex: 1;
-    text-align: center;
-    font-size: 0.8rem;
-  }
-
-  /* 4. Título COMPACTO */
+  /* Ocultamos lo de escritorio */
+  .desktopLinks, 
+  .statusPod,
   .brandTitle {
-    font-size: 1.5rem; /* Más pequeño para que no moleste */
-    margin: 0;         /* Quitamos márgenes extra */
-    margin-top: 5px;   /* Apenas separado de la barra */
-    
-    /* Fondo oscuro semitransparente para que se lea si pasa sobre algo */
-    text-shadow: 0 10px 20px rgba(0,0,0,0.8); 
+    display: none;
+  }
+
+  /* Mostramos la hamburguesa */
+  .mobileToggle {
+    display: flex;
   }
 }

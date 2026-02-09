@@ -110,7 +110,7 @@
   grid-template-columns: repeat(2, 1fr);
   gap: 12px;
   overflow-y: auto;
-  max-height: 320px;
+  max-height: 500px;
   padding-right: 5px;
 }
 
@@ -300,7 +300,10 @@
 
 /* --- 8. RESPONSIVE --- */
 @media (max-width: 800px) {
-  .section { padding-top: 100px; padding-bottom: 50px; }
+  .section { 
+    padding-top: 100px;
+    padding-bottom: 50px;
+   }
   .headerContainer { top: 30px; }
   .glitchTitle { font-size: 2rem; }
   
@@ -314,6 +317,9 @@
   .interface { border-right: none; padding: 25px; }
   
   .optionsGrid { grid-template-columns: 1fr; }
+  .container{
+    margin-top: 5rem;
+  }
 }
 
 .whatsappButton {

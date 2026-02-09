@@ -76,9 +76,13 @@ Quedo a la espera para coordinar.
     <section className={styles.section} id="contacto">
       
       <div className={styles.headerContainer}>
-        <h2 className={styles.glitchTitle}>
+        <h2 className={`${styles.glitchTitle} notranslate`}>
           <HyperText text="VAMOS A CREAR TU PÁGINA" triggerOnLoad={true} />
         </h2>
+        <br />
+        <h3 className={`${styles.glitchTitle} notranslate`}>
+          <HyperText text="LET'S CREATE YOUR PAGE" triggerOnLoad={true} />
+        </h3>
         <span className={styles.subTitle}>CONFIGURACIÓN DE SISTEMA</span>
       </div>
 

@@ -9,6 +9,7 @@ import GrowthMonitor from "@/components/GrowthMonitor/GrowthMonitor";
 import Roadmap from "@/components/Roadmap/Roadmap";
 import Background from "@/components/Background/Background";
 import Footer from "@/components/Footer/Footer";
+import About from "@/components/About/About";
 
 export default function Home() {
   return (
@@ -43,12 +44,14 @@ export default function Home() {
       <div style={{ position: 'relative', zIndex: 1 }}>
         <Hero />
       </div>
+      
 
       {/* 3. TECH STREAM CON SU PROPIO DEGRADADO */}
       <div style={{ position: 'relative', zIndex: 1, marginTop: '-20px' }}>
         
         {/* El componente */}
         <TechStream />
+
         
         {/* MÁSCARA LOCAL: Solo oscurece la parte de abajo de ESTA franja */}
         <div style={{
@@ -57,7 +60,6 @@ export default function Home() {
           left: 0,
           width: '100%',
           height: '80px', /* Altura pequeña para no tapar el texto */
-          background: 'linear-gradient(to bottom, transparent, #050505)',
           pointerEvents: 'none',
           zIndex: 2
         }} />
@@ -70,6 +72,7 @@ export default function Home() {
         backgroundColor: '#050505', 
         paddingTop: '50px' /* Espacio para respirar */
       }}>
+          <About />
          <GrowthMonitor />
          <Services />
          <Roadmap />

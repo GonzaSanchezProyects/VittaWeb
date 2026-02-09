@@ -56,7 +56,7 @@ export default function GrowthMonitor() {
               <Counter value={98} unit="%" />
             </span>
             <span className={styles.metricLabel}>Performance Google</span>
-            <svg className={styles.chartLine} viewBox="0 0 100 40" preserveAspectRatio="none">
+            <svg className={`${styles.chartLine} notranslate`} viewBox="0 0 100 40" preserveAspectRatio="none">
               <path d="M0 35 Q 25 35 35 20 T 70 15 T 100 5" />
             </svg>
           </div>
@@ -66,7 +66,7 @@ export default function GrowthMonitor() {
               <Counter value={2} unit="s" />
             </span>
             <span className={styles.metricLabel}>Tiempo de Carga</span>
-             <svg className={styles.chartLine} viewBox="0 0 100 40" preserveAspectRatio="none">
+             <svg className={`${styles.chartLine} notranslate`} viewBox="0 0 100 40" preserveAspectRatio="none">
               <path d="M0 5 Q 50 5 50 35 T 100 35" /> 
             </svg>
           </div>
@@ -76,7 +76,7 @@ export default function GrowthMonitor() {
               +<Counter value={45} unit="%" />
             </span>
             <span className={styles.metricLabel}>Retención de Clientes</span>
-             <svg className={styles.chartLine} viewBox="0 0 100 40" preserveAspectRatio="none">
+             <svg className={`${styles.chartLine} notranslate`} viewBox="0 0 100 40" preserveAspectRatio="none">
               <path d="M0 30 L 20 25 L 40 28 L 60 10 L 80 15 L 100 2" />
             </svg>
           </div>
@@ -86,7 +86,7 @@ export default function GrowthMonitor() {
               24<span className={styles.metricUnit}>/7</span>
             </span>
             <span className={styles.metricLabel}>Ventas Automáticas</span>
-            <svg className={styles.chartLine} viewBox="0 0 100 40" preserveAspectRatio="none">
+            <svg className={`${styles.chartLine} notranslate`} viewBox="0 0 100 40" preserveAspectRatio="none">
                <path d="M0 35 L 100 35" strokeDasharray="5,5" />
             </svg>
           </div>

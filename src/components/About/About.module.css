@@ -1,0 +1,156 @@
+/* src/components/About/About.module.css */
+
+.aboutSection {
+  position: relative;
+  padding: 120px 20px;
+  background: transparent; /* Se mezcla con el fondo general */
+  overflow: hidden;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+/* En pantallas grandes (Desktop) ponemos 2 columnas */
+@media (min-width: 1024px) {
+  .container {
+    grid-template-columns: 1fr 1fr; /* Izquierda: Imagen, Derecha: Texto */
+    gap: 100px;
+  }
+}
+
+/* --- COLUMNA IZQUIERDA: IMAGEN --- */
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.imagePlaceholder {
+  position: relative;
+  width: 70%;
+  max-width: 500px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.photo {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  /* Filtro sutil para que la foto no "brille" demasiado en dark mode */
+  filter: brightness(0.9) contrast(1.1);
+  transition: transform 0.5s ease;
+}
+
+.imagePlaceholder:hover .photo {
+  transform: scale(1.03); /* Zoom suave al pasar el mouse */
+}
+
+/* Tarjeta flotante con nombre sobre la foto */
+.glassCard {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+  background: rgba(10, 10, 10, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 15px 20px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+.glassCard span {
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: -0.02em;
+}
+
+.glassCard small {
+  color: #a0a0a0;
+  font-size: 0.85rem;
+  margin-top: 2px;
+}
+
+/* --- COLUMNA DERECHA: TEXTO --- */
+.contentWrapper {
+  color: white;
+}
+
+.title {
+  font-size: 2.5rem;
+  line-height: 1.1;
+  font-weight: 800;
+  margin-bottom: 30px;
+  letter-spacing: -0.03em;
+}
+
+/* Highlight en gradiente cian (Tu color de marca) */
+.highlight {
+  background: linear-gradient(90deg, #00e5ff, #0072ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #b0b0b0; /* Gris suave para lectura */
+  margin-bottom: 20px;
+}
+
+.text strong {
+  color: #fff;
+  font-weight: 600;
+}
+
+/* --- STATS GRID --- */
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 40px;
+  padding-top: 40px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.statItem h3 {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 5px;
+}
+
+.statItem p {
+  font-size: 0.9rem;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .title {
+    font-size: 2rem;
+  }
+  
+  .statsGrid {
+    grid-template-columns: 1fr; /* Una columna en móvil */
+    gap: 30px;
+    text-align: center;
+  }
+}
