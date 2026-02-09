@@ -125,7 +125,7 @@ export default function Navbar() {
       </m.nav>
 
       {/* 3. TÍTULO QUE DESAPARECE AL SCROLL */}
-      <m.h2
+      <m.div
           className={styles.brandTitle}
           // Usamos los valores transformados del scroll
           style={{ 
@@ -138,7 +138,7 @@ export default function Navbar() {
           transition={{ duration: 0.8, ease: "easeOut" }}
       >
           VITTA WEB<span className={styles.brandDot}>.</span>
-      </m.h2>
+      </m.div>
     </div>
   );
 }

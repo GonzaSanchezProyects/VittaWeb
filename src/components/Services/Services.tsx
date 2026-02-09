@@ -50,7 +50,7 @@ export default function Services() {
         
         {/* LISTA */}
         <div className={styles.listContainer}>
-          <span className={styles.headerTitle}>NUESTRAS CAPACIDADES</span>
+          <h2 className={styles.headerTitle}>NUESTRAS CAPACIDADES</h2>
           
           {services.map((service, index) => {
             const isActive = activeId === service.id;

@@ -28,10 +28,10 @@ export default function Hero() {
         </m.div>
 
         <div className={styles.textLayerContainer}>
-          <h1 className={styles.titleWireframe}>
+          <span className={styles.titleWireframe}>
             Su negocio merece <br />
             Estar en internet.
-          </h1>
+          </span>
 
           <m.h1 
             className={styles.titleReal}

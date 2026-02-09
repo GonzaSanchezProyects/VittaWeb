@@ -21,6 +21,9 @@ export const metadata: Metadata = {
     default: "Vitta Studio | Ingeniería Web de Alto Rendimiento",
     template: "%s | Vitta Studio" 
   },
+  alternates: {
+    canonical: '/',
+  },
   description: "Estudio de desarrollo web especializado en Next.js, SEO técnico y experiencias digitales escalables. Diseño web premium en Argentina y el mundo.",
   keywords: ["Desarrollo Web", "Next.js", "Agencia SEO", "Diseño Web Mendoza", "Software a Medida"],
   authors: [{ name: "Gonzalo Sanchez" }],
