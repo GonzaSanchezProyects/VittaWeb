@@ -1,10 +1,11 @@
+/* src/components/Navbar/index.tsx */
 'use client';
 import { useState, useEffect } from 'react';
-import { m, useScroll, useTransform } from 'framer-motion'; // Importamos useScroll y useTransform
+import { m, useScroll, useTransform } from 'framer-motion';
 import styles from './Navbar.module.css';
 import Image from 'next/image';
-import Link from 'next/link'; 
-
+import Link from 'next/link';
+// YA NO IMPORTAMOS GoogleTranslate AQUÍ
 
 const tabs = [
   { id: 'servicios', label: 'Servicios' },
@@ -17,17 +18,9 @@ export default function Navbar() {
   const [activeTab, setActiveTab] = useState('');
   const [time, setTime] = useState('');
 
-  // 1. Detectamos el scroll global
   const { scrollY } = useScroll();
-
-  // 2. Transformamos el scroll en opacidad y escala para el título
-  // De 0px a 60px de scroll -> Opacidad baja de 1 a 0.
   const titleOpacity = useTransform(scrollY, [0, 60], [1, 0]);
-  
-  // Opcional: Que también se vaya un poco para arriba
   const titleY = useTransform(scrollY, [0, 60], [0, -20]);
-  
-  // Opcional: Controlar "pointer-events" para que no se pueda clickear cuando es invisible
   const [isHidden, setIsHidden] = useState(false);
   
   useEffect(() => {
@@ -36,8 +29,6 @@ export default function Navbar() {
     });
   }, [scrollY]);
 
-
-  // Reloj
   useEffect(() => {
     const updateTime = () => {
       const now = new Date();
@@ -48,7 +39,6 @@ export default function Navbar() {
     return () => clearInterval(interval);
   }, []);
 
-  // --- FUNCIÓN DE SCROLL SUAVE ---
   const handleScroll = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>, id: string) => {
     e.preventDefault();
     setActiveTab(id);
@@ -61,38 +51,24 @@ export default function Navbar() {
 
   return (
     <div className={styles.navContainer}>
-      
+      {/* ELIMINADO <GoogleTranslate /> DE AQUÍ */}
+
       <m.nav 
         className={styles.glassIsland}
         initial={{ y: -50, opacity: 0, scale: 0.9 }}
         animate={{ y: 0, opacity: 1, scale: 1 }}
         transition={{ type: "spring", stiffness: 200, damping: 20, delay: 0.5 }}
       >
-        
         <div className={styles.logo}>
           <Link href="/" className={styles.logoLink}>
-            <div style={{ display: 'flex', alignItems: 'center' }}> {/* Flex para alinear imagen y punto */}
-              
-              <Image 
-                src="/logo.png" 
-                alt="Vitta Web Logo" 
-                width={40}       // ANCHO REAL de tu imagen (cámbialo al correcto)
-                height={40}       // ALTO REAL de tu imagen
-                priority          // ¡CRUCIAL! Esto le dice a Google "carga esto primero"
-                quality={75}     // Para que el logo se vea nítido
-              />
-              
-              {/* El punto cian */}
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+              <Image src="/logo.png" alt="Vitta Web Logo" width={40} height={40} priority quality={75} />
               <span style={{ color: '#00e5ff', fontSize: '1.5rem', lineHeight: 1 }}>.</span>
-              
             </div>
           </Link>
         </div>
 
-        <div 
-          className={styles.navLinks} 
-          onMouseLeave={() => setActiveTab('')} 
-        >
+        <div className={styles.navLinks} onMouseLeave={() => setActiveTab('')}>
           {tabs.map((tab) => (
             <a 
               key={tab.id} 
@@ -101,40 +77,26 @@ export default function Navbar() {
               onMouseEnter={() => setActiveTab(tab.id)}
               onClick={(e) => handleScroll(e, tab.id)}
             >
-              <span style={{position: 'relative', zIndex: 2}}>
-                {tab.label}
-              </span>
-
+              <span style={{position: 'relative', zIndex: 2}}>{tab.label}</span>
               {activeTab === tab.id && (
-                <m.div
-                  layoutId="nav-pill" 
-                  className={styles.activeTab}
-                  transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-                />
+                <m.div layoutId="nav-pill" className={styles.activeTab} transition={{ type: "spring", bounce: 0.2, duration: 0.6 }} />
               )}
             </a>
           ))}
+          {/* ELIMINADOS LOS BOTONES ES|EN DE AQUÍ */}
         </div>
 
         <div className={styles.statusPod}>
           <div className={styles.statusDot} />
-          <div className={styles.statusText}>
-            {time} <span style={{opacity: 0.5}}>MZA</span>
-          </div>
+          <div className={styles.statusText}>{time} <span style={{opacity: 0.5}}>MZA</span></div>
         </div>
       </m.nav>
 
-      {/* 3. TÍTULO QUE DESAPARECE AL SCROLL */}
       <m.div
           className={styles.brandTitle}
-          // Usamos los valores transformados del scroll
-          style={{ 
-            opacity: titleOpacity, 
-            y: titleY,
-            pointerEvents: isHidden ? 'none' : 'auto' // Evita clicks fantasma
-          }}
-          initial={{ opacity: 0, y: -30 }} // La animación inicial de entrada se mantiene, pero Framer la fusionará
-          animate={{ opacity: 1, y: 0 }}   // Esto podría pelear con el scroll, mejor dejar que el style controle después de la carga
+          style={{ opacity: titleOpacity, y: titleY, pointerEvents: isHidden ? 'none' : 'auto' }}
+          initial={{ opacity: 0, y: -30 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
       >
           VITTA WEB<span className={styles.brandDot}>.</span>

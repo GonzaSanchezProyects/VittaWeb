@@ -7,6 +7,7 @@ import MotionProvider from "@/components/MotionProvider/MotionProvider";
 import Navbar from "../components/Navbar/index";
 import JsonLd from "../components/JsonLd/JsonLd";
 import { Analytics } from "@vercel/analytics/next";
+import GoogleTranslate from "@/components/GoogleTranslate/GoogleTranslate";
 
 // IMPORTAMOS EL COMPONENTE CLIENTE QUE CREAMOS EN EL PASO 1
 import ClientCursor from "@/components/ClientCursor"; 
@@ -69,7 +70,7 @@ export default function RootLayout({
 
         {/* Aquí usamos el componente puente, sin configuraciones extra */}
         <ClientCursor />
-
+        <GoogleTranslate />
         <MotionProvider>
           <Navbar />
           <SmoothScroll>{children}</SmoothScroll>
