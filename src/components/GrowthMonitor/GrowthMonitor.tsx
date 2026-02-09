@@ -4,14 +4,14 @@ import { useRef } from 'react';
 import { useInView, motion, useSpring, useTransform } from 'framer-motion';
 import styles from './GrowthMonitor.module.css';
 
-// 1. DEFINIMOS LA INTERFAZ PARA LOS PROPS
+// 1. DEFINIMOS QUÉ DATOS RECIBE EL CONTADOR (La solución al error)
 interface CounterProps {
   value: number;
   unit?: string;
   prefix?: string;
 }
 
-// 2. APLICAMOS EL TIPO AL COMPONENTE
+// 2. APLICAMOS LA INTERFAZ AQUÍ
 function Counter({ value, unit = "", prefix = "" }: CounterProps) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
@@ -23,6 +23,7 @@ function Counter({ value, unit = "", prefix = "" }: CounterProps) {
     spring.set(value);
   }
 
+  // Agregamos 'notranslate' para proteger la animación de Google Translate
   return (
     <span ref={ref} className="notranslate" translate="no">
       {prefix}
