@@ -1,230 +1,195 @@
-.section {
-  padding: 120px 20px;
-  background: transparent;
-  display: flex;
-  justify-content: center;
+/* src/components/GrowthMonitor/GrowthMonitor.module.css */
+
+.monitorSection {
+  padding: 100px 20px;
+  background: #050505; /* Fondo oscuro continuo */
   position: relative;
-  overflow: hidden; /* Evitar scroll horizontal por SVGs */
+  overflow: hidden;
 }
 
 .container {
-  width: 100%;
-  max-width: 1200px;
-  display: grid;
-  grid-template-columns: 0.8fr 1.2fr; /* Más espacio a las gráficas */
-  gap: 80px;
-  align-items: center;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
-/* === TEXTO IZQUIERDA === */
-.textContent {
-  max-width: 500px;
-}
-
-.label {
-  color: var(--accent-color, #00e5ff);
-  font-family: monospace;
-  font-size: 0.85rem;
-  letter-spacing: 0.2em;
-  margin-bottom: 24px;
-  display: block;
-  font-weight: 700;
+/* HEADER */
+.header {
+  text-align: center;
+  margin-bottom: 60px;
+  padding: 0 10px;
 }
 
 .title {
   font-size: 3rem;
   font-weight: 800;
-  color: #fff;
-  line-height: 1.1;
-  margin-bottom: 24px;
-}
-
-.highlightText {
-  color: transparent;
-  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.5);
-  /* Opcional: Un gradiente sutil al texto destacado */
-  background: linear-gradient(to right, #fff, #999);
-  background-clip: text;
+  background: linear-gradient(180deg, #fff, #666);
   -webkit-background-clip: text;
-  -webkit-text-stroke: 0;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 15px;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
 }
 
-.description {
-  color: #a1a1aa;
+.subtitle {
+  color: #888;
   font-size: 1.1rem;
-  line-height: 1.7;
-  margin-bottom: 30px;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
-.description strong {
-  color: #fff;
-  font-weight: 600;
-}
-
-.trustBadge {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 8px 16px;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 50px;
-  font-size: 0.8rem;
-  color: #ccc;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.greenDot {
-  width: 8px;
-  height: 8px;
-  background-color: #4ade80;
-  border-radius: 50%;
-  box-shadow: 0 0 10px #4ade80;
-}
-
-/* === GRID DE MÉTRICAS === */
-.metricsGrid {
+/* GRID LAYOUT */
+.grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
+  grid-template-columns: repeat(2, 1fr); /* 2 columnas en desktop */
+  gap: 20px;
 }
 
-/* Estilo Base de Tarjeta */
+/* CARDS */
 .card {
-  background-color: rgba(15, 15, 15, 0.6);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 24px;
-  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 24px;
+  padding: 30px;
   position: relative;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 180px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  overflow: hidden;
+  min-height: 250px;
+  transition: transform 0.3s ease;
 }
 
 .card:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
   transform: translateY(-5px);
-  border-color: rgba(255, 255, 255, 0.2);
 }
 
-/* TARJETA DESTACADA (Tráfico) */
-.cardFeatured {
-  grid-column: span 2; /* Ocupa todo el ancho en desktop */
-  background: linear-gradient(150deg, rgba(20, 20, 20, 0.9), rgba(5, 5, 5, 0.95));
-  border: 1px solid rgba(0, 229, 255, 0.2);
-  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
-  min-height: 220px;
+/* CONTENEDORES DE GRÁFICOS */
+.chartContainer {
+  height: 100px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
 }
 
-.cardFeatured .metricValueContainer {
-  font-size: 4.5rem; /* Número gigante */
-  background: linear-gradient(to bottom, #fff, #aaa);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+.chart {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
 }
 
-.cardFeatured .chartSvg {
-  opacity: 1; /* Gráfico más visible */
+/* CÍRCULO DE VELOCIDAD */
+.speedCircle {
+  position: relative;
+  width: 100px;
+  height: 100px;
+}
+
+.circleText {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: 800;
+  color: #fff;
+}
+
+/* BADGE DE RANKING */
+.rankBadge {
+  width: 80px;
   height: 80px;
-  bottom: 0;
+  background: linear-gradient(135deg, #ffd700, #b8860b);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: #000;
+  box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+  margin-bottom: 20px;
 }
 
-/* Textos dentro de cards */
-.metricTitle {
-  font-size: 0.85rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: #666;
-  font-weight: 700;
-  margin-bottom: 10px;
-  z-index: 2;
-}
-
-.metricValueContainer {
+/* MÉTRICAS (TEXTO) */
+.metric h3 {
   font-size: 3rem;
   font-weight: 800;
   color: #fff;
+  margin: 0;
   line-height: 1;
-  z-index: 2;
-  font-variant-numeric: tabular-nums;
-  display: flex;
-  align-items: baseline;
+  letter-spacing: -0.02em;
 }
 
-.metricUnit {
-  font-size: 0.5em; /* La mitad del tamaño del número */
-  color: var(--accent-color, #00e5ff);
-  margin-left: 4px;
-  font-weight: 600;
-  -webkit-text-fill-color: var(--accent-color, #00e5ff); /* Resetear gradiente */
-}
-
-.metricSub {
-  font-size: 0.9rem;
+.metric p {
   color: #888;
-  margin-top: 8px;
-  font-weight: 500;
-  z-index: 2;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 5px;
+  font-weight: 600;
 }
 
-.staticText {
-  color: #fff;
-}
-
-/* SVGs de fondo */
-.chartSvg {
-  position: absolute;
-  bottom: 10px;
-  left: 0;
-  width: 100%;
-  height: 50px;
-  z-index: 1;
-  opacity: 0.5;
-  pointer-events: none;
-}
-
-/* Barras de ranking (Tarjeta 4) */
-.rankBars {
-  display: flex;
-  gap: 8px;
-  align-items: flex-end;
-  height: 50px;
-  position: absolute;
-  bottom: 24px;
-  right: 24px;
-}
-.bar {
-  width: 12px;
-  background: #333;
-  border-radius: 2px;
-}
-.activeBar {
-  background: var(--accent-color, #00e5ff);
-  box-shadow: 0 0 15px rgba(0, 229, 255, 0.4);
-}
-
-/* Responsive */
-@media (max-width: 1024px) {
-  .container {
-    grid-template-columns: 1fr;
-    gap: 40px;
-    text-align: center;
+/* --- MOBILE & TABLET (RESPONSIVE) --- */
+@media (max-width: 768px) {
+  .monitorSection {
+    padding: 60px 15px; /* Menos padding lateral */
   }
-  .textContent { margin: 0 auto; }
-  .trustBadge { margin: 0 auto; }
-  .rankBars { display: none; } /* Simplificar en tablets */
+
+  .title {
+    font-size: 2.2rem; /* Título más pequeño */
+  }
+
+  .grid {
+    grid-template-columns: 1fr; /* 1 sola columna */
+    gap: 15px;
+  }
+
+  .card {
+    min-height: auto; /* Altura automática */
+    padding: 25px;
+    flex-direction: row; /* Icono a la izquierda, texto a la derecha */
+    align-items: center;
+    gap: 20px;
+  }
+
+  /* Reordenamos para que quede horizontal en móvil */
+  .chartContainer {
+    width: 60px; /* Gráficos más pequeños */
+    height: 60px;
+    margin-bottom: 0;
+    flex-shrink: 0;
+  }
+  
+  /* Ajustes específicos para los gráficos en móvil */
+  .speedCircle {
+    width: 60px;
+    height: 60px;
+  }
+  .circleText {
+    font-size: 1.2rem;
+  }
+  .rankBadge {
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+    margin-bottom: 0;
+  }
+
+  .metric {
+    text-align: left;
+  }
+
+  .metric h3 {
+    font-size: 2rem; /* Números más chicos */
+  }
+
+  .metric p {
+    font-size: 0.8rem;
+  }
 }
 
-@media (max-width: 600px) {
-  .metricsGrid {
-    grid-template-columns: 1fr;
-  }
-  .cardFeatured {
-    grid-column: span 1;
-  }
-  .title { font-size: 2.2rem; }
-  .metricValueContainer { font-size: 2.5rem; }
-  .cardFeatured .metricValueContainer { font-size: 3.5rem; }
-}
