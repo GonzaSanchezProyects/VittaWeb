@@ -1,23 +1,22 @@
-/* src/components/GrowthMonitor/GrowthMonitor.module.css */
-
 .section {
-  padding: 100px 20px;
+  padding: 120px 20px;
   background: transparent;
   display: flex;
   justify-content: center;
   position: relative;
-  z-index: 2;
+  overflow: hidden; /* Evitar scroll horizontal por SVGs */
 }
 
 .container {
   width: 100%;
-  max-width: 1100px;
+  max-width: 1200px;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
+  grid-template-columns: 0.8fr 1.2fr; /* Más espacio a las gráficas */
+  gap: 80px;
   align-items: center;
 }
 
+/* === TEXTO IZQUIERDA === */
 .textContent {
   max-width: 500px;
 }
@@ -25,118 +24,207 @@
 .label {
   color: var(--accent-color, #00e5ff);
   font-family: monospace;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   letter-spacing: 0.2em;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
   display: block;
+  font-weight: 700;
 }
 
 .title {
-  font-size: 2.5rem;
-  font-weight: 700;
+  font-size: 3rem;
+  font-weight: 800;
   color: #fff;
-  line-height: 1.2;
-  margin-bottom: 20px;
+  line-height: 1.1;
+  margin-bottom: 24px;
+}
+
+.highlightText {
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.5);
+  /* Opcional: Un gradiente sutil al texto destacado */
+  background: linear-gradient(to right, #fff, #999);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-stroke: 0;
 }
 
 .description {
-  color: #aaa;
+  color: #a1a1aa;
   font-size: 1.1rem;
-  line-height: 1.6;
+  line-height: 1.7;
+  margin-bottom: 30px;
 }
 
-/* GRIDS DE MÉTRICAS */
+.description strong {
+  color: #fff;
+  font-weight: 600;
+}
+
+.trustBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 50px;
+  font-size: 0.8rem;
+  color: #ccc;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.greenDot {
+  width: 8px;
+  height: 8px;
+  background-color: #4ade80;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #4ade80;
+}
+
+/* === GRID DE MÉTRICAS === */
 .metricsGrid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
+  gap: 24px;
 }
 
-/* --- TARJETAS SÓLIDAS Y VISIBLES --- */
+/* Estilo Base de Tarjeta */
 .card {
-  /* SOLUCIÓN: Usamos un gris #111 (más claro que el fondo #050505) */
-  background-color: #111;
-  /* Un gradiente sutil para darle volumen 3D */
-  background-image: linear-gradient(145deg, #151515, #0a0a0a);
-  
-  /* Borde más visible */
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  
-  padding: 30px;
-  border-radius: 16px;
+  background-color: rgba(15, 15, 15, 0.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 24px;
+  border-radius: 20px;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 180px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   overflow: hidden;
-  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-  
-  /* Sombra fuerte para despegarlo del fondo */
-  box-shadow: 0 10px 40px rgba(0,0,0,0.5);
 }
 
 .card:hover {
-  border-color: var(--accent-color, #00e5ff);
   transform: translateY(-5px);
-  /* Sombra de neón al hacer hover */
-  box-shadow: 0 20px 50px rgba(0,0,0,0.8), 0 0 15px rgba(0, 229, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
-/* Efecto de luz en el borde superior (Highlight) */
-.card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; width: 100%; height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-  opacity: 1;
+/* TARJETA DESTACADA (Tráfico) */
+.cardFeatured {
+  grid-column: span 2; /* Ocupa todo el ancho en desktop */
+  background: linear-gradient(150deg, rgba(20, 20, 20, 0.9), rgba(5, 5, 5, 0.95));
+  border: 1px solid rgba(0, 229, 255, 0.2);
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
+  min-height: 220px;
 }
 
-.metricValue {
-  font-size: 3.5rem;
-  font-weight: 800;
-  color: #fff;
-  display: block;
-  margin-bottom: 5px;
-  font-variant-numeric: tabular-nums;
-  position: relative;
-  z-index: 2;
-  text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+.cardFeatured .metricValueContainer {
+  font-size: 4.5rem; /* Número gigante */
+  background: linear-gradient(to bottom, #fff, #aaa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-.metricLabel {
-  color: #999; /* Un poco más claro */
-  font-size: 0.8rem;
+.cardFeatured .chartSvg {
+  opacity: 1; /* Gráfico más visible */
+  height: 80px;
+  bottom: 0;
+}
+
+/* Textos dentro de cards */
+.metricTitle {
+  font-size: 0.85rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  font-weight: 600;
-  position: relative;
+  color: #666;
+  font-weight: 700;
+  margin-bottom: 10px;
   z-index: 2;
+}
+
+.metricValueContainer {
+  font-size: 3rem;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1;
+  z-index: 2;
+  font-variant-numeric: tabular-nums;
+  display: flex;
+  align-items: baseline;
 }
 
 .metricUnit {
-  font-size: 1.5rem;
+  font-size: 0.5em; /* La mitad del tamaño del número */
   color: var(--accent-color, #00e5ff);
-  margin-left: 5px;
+  margin-left: 4px;
+  font-weight: 600;
+  -webkit-text-fill-color: var(--accent-color, #00e5ff); /* Resetear gradiente */
 }
 
-/* Gráfico decorativo */
-.chartLine {
+.metricSub {
+  font-size: 0.9rem;
+  color: #888;
+  margin-top: 8px;
+  font-weight: 500;
+  z-index: 2;
+}
+
+.staticText {
+  color: #fff;
+}
+
+/* SVGs de fondo */
+.chartSvg {
   position: absolute;
-  bottom: 0;
+  bottom: 10px;
   left: 0;
   width: 100%;
-  height: 60px;
-  opacity: 0.3; 
-  fill: none;
-  stroke: var(--accent-color, #00e5ff);
-  stroke-width: 2;
+  height: 50px;
   z-index: 1;
+  opacity: 0.5;
   pointer-events: none;
-  mask-image: linear-gradient(to bottom, black, transparent); 
-  -webkit-mask-image: linear-gradient(to bottom, black, transparent);
 }
 
-@media (max-width: 900px) {
-  .container { grid-template-columns: 1fr; }
-  .metricsGrid { grid-template-columns: 1fr 1fr; }
+/* Barras de ranking (Tarjeta 4) */
+.rankBars {
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+  height: 50px;
+  position: absolute;
+  bottom: 24px;
+  right: 24px;
 }
+.bar {
+  width: 12px;
+  background: #333;
+  border-radius: 2px;
+}
+.activeBar {
+  background: var(--accent-color, #00e5ff);
+  box-shadow: 0 0 15px rgba(0, 229, 255, 0.4);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .container {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    text-align: center;
+  }
+  .textContent { margin: 0 auto; }
+  .trustBadge { margin: 0 auto; }
+  .rankBars { display: none; } /* Simplificar en tablets */
+}
+
 @media (max-width: 600px) {
-  .metricsGrid { grid-template-columns: 1fr; }
+  .metricsGrid {
+    grid-template-columns: 1fr;
+  }
+  .cardFeatured {
+    grid-column: span 1;
+  }
+  .title { font-size: 2.2rem; }
+  .metricValueContainer { font-size: 2.5rem; }
+  .cardFeatured .metricValueContainer { font-size: 3.5rem; }
 }

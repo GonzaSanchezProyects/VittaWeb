@@ -72,8 +72,9 @@ export default function Home() {
         backgroundColor: '#050505', 
         paddingTop: '50px' /* Espacio para respirar */
       }}>
-          <About />
+          
          <GrowthMonitor />
+         <About />
          <Services />
          <Roadmap />
          <Work />
