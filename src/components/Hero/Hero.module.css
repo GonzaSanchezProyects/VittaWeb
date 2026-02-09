@@ -163,6 +163,10 @@
   .titleWireframe, .titleReal { font-size: 2.8rem; }
   
   .label { display: none; }
+
+  .heroContainer {
+  padding-top: 100px
+  }
   
   .pricingGrid {
     flex-direction: column; /* Apilar tarjetas en móviles */
