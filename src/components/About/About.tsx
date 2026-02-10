@@ -58,7 +58,7 @@ export default function About() {
 
           <div className={styles.statsGrid}>
             <div className={styles.statItem}>
-              <h3>+3</h3>
+              <h3>+7</h3>
               <p>Años de Exp.</p>
             </div>
             <div className={styles.statItem}>

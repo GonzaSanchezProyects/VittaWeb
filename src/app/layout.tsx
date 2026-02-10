@@ -17,8 +17,8 @@ const baseUrl = "https://vittaweb.site";
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
-    default: "Vitta Studio | Ingeniería Web de Alto Rendimiento",
-    template: "%s | Vitta Studio" 
+    default: "Vitta Web | Desarrollo Web de Alto Rendimiento",
+    template: "%s | Vitta Web" 
   },
   alternates: {
     canonical: '/',
@@ -27,21 +27,34 @@ export const metadata: Metadata = {
     },
   },
   description: "Estudio de desarrollo web especializado en Next.js, SEO técnico y experiencias digitales escalables. Diseño web premium en Argentina y el mundo.",
-  keywords: ["Desarrollo Web", "Next.js", "Agencia SEO", "Diseño Web Mendoza", "Software a Medida", "Programación Web", "Vitta Web"],
+  keywords: ["Diseño Web Mendoza",
+  "Agencia SEO Mendoza",
+  "Desarrollo Web Argentina",
+  
+  // Tecnológicas (Tu diferencial)
+  "Next.js Developer",
+  "Programación Web a Medida",
+  "Vitta Web",
+  
+  // Servicios Específicos (Long Tail)
+  "Optimización de Velocidad Web",
+  "Diseño UX/UI Premium",
+  "Consultoría Digital para PYMES",
+  "Tiendas Online Scalables"],
   authors: [{ name: "Gonzalo Sanchez", url: baseUrl }],
-  creator: "Vitta Studio",
-  publisher: "Vitta Studio",
+  creator: "Vitta Web",
+  publisher: "Vitta Web",
   openGraph: {
-    title: "Vitta Studio | Ingeniería Web",
+    title: "Vitta Web | Ingeniería Web",
     description: "Desarrollo de software a medida para empresas que buscan liderar su mercado.",
     url: baseUrl,
-    siteName: "Vitta Studio",
+    siteName: "Vitta Web",
     images: [
       {
         url: "/og-image.jpg", 
         width: 1200,
         height: 630,
-        alt: "Vitta Studio Preview",
+        alt: "Vitta Web Preview",
       },
     ],
     locale: "es_AR",

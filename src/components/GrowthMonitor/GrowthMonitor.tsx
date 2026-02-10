@@ -1,17 +1,15 @@
 /* src/components/GrowthMonitor/GrowthMonitor.tsx */
 'use client';
 import { useRef } from 'react';
-import { useInView, motion, useSpring, useTransform } from 'framer-motion';
+import { useInView, m, useSpring, useTransform } from 'framer-motion';
 import styles from './GrowthMonitor.module.css';
 
-// 1. DEFINIMOS QUÉ DATOS RECIBE EL CONTADOR (La solución al error)
 interface CounterProps {
   value: number;
   unit?: string;
   prefix?: string;
 }
 
-// 2. APLICAMOS LA INTERFAZ AQUÍ
 function Counter({ value, unit = "", prefix = "" }: CounterProps) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
@@ -23,11 +21,10 @@ function Counter({ value, unit = "", prefix = "" }: CounterProps) {
     spring.set(value);
   }
 
-  // Agregamos 'notranslate' para proteger la animación de Google Translate
   return (
     <span ref={ref} className="notranslate" translate="no">
       {prefix}
-      <motion.span>{display}</motion.span>
+      <m.span>{display}</m.span>
       {unit}
     </span>
   );
@@ -49,9 +46,8 @@ export default function GrowthMonitor() {
           {/* CARD 1: TRÁFICO */}
           <div className={styles.card}>
             <div className={styles.chartContainer}>
-               {/* Gráfico de línea simple con SVG */}
                <svg viewBox="0 0 100 40" className={styles.chart}>
-                 <motion.path 
+                 <m.path 
                    d="M0 35 Q 25 35, 35 20 T 70 15 T 100 5" 
                    fill="none" 
                    stroke="#00e5ff" 
@@ -64,7 +60,7 @@ export default function GrowthMonitor() {
                     <stop offset="0%" stopColor="rgba(0, 229, 255, 0.2)" />
                     <stop offset="100%" stopColor="rgba(0, 229, 255, 0)" />
                  </linearGradient>
-                 <motion.path 
+                 <m.path 
                    d="M0 35 Q 25 35, 35 20 T 70 15 T 100 5 V 40 H 0 Z" 
                    fill="url(#gradient1)" 
                    initial={{ opacity: 0 }}
@@ -92,7 +88,7 @@ export default function GrowthMonitor() {
                      stroke="rgba(255, 255, 255, 0.1)"
                      strokeWidth="2"
                    />
-                   <motion.path
+                   <m.path
                      d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
                      fill="none"
                      stroke="#00ff88"
@@ -118,25 +114,25 @@ export default function GrowthMonitor() {
           <div className={styles.card}>
             <div className={styles.chartContainer}>
                <svg viewBox="0 0 100 40" className={styles.chart}>
-                 <motion.rect 
+                 <m.rect 
                    x="10" y="20" width="10" height="20" fill="#333" 
                    initial={{ height: 0, y: 40 }}
                    whileInView={{ height: 20, y: 20 }}
                    transition={{ duration: 0.5 }}
                  />
-                 <motion.rect 
+                 <m.rect 
                    x="30" y="15" width="10" height="25" fill="#444" 
                    initial={{ height: 0, y: 40 }}
                    whileInView={{ height: 25, y: 15 }}
                    transition={{ duration: 0.5, delay: 0.1 }}
                  />
-                 <motion.rect 
+                 <m.rect 
                    x="50" y="25" width="10" height="15" fill="#333" 
                    initial={{ height: 0, y: 40 }}
                    whileInView={{ height: 15, y: 25 }}
                    transition={{ duration: 0.5, delay: 0.2 }}
                  />
-                 <motion.rect 
+                 <m.rect 
                    x="70" y="5" width="10" height="35" fill="#00e5ff" 
                    initial={{ height: 0, y: 40 }}
                    whileInView={{ height: 35, y: 5 }}
@@ -152,10 +148,14 @@ export default function GrowthMonitor() {
             </div>
           </div>
 
-          {/* CARD 4: RANKING */}
+          {/* CARD 4: RANKING (FAKE GOOGLE AWARD) */}
           <div className={styles.card}>
-             <div className={styles.rankBadge}>
-                <span className="notranslate" translate="no">#1</span>
+             <div className={styles.googleBadge}>
+                <div className={styles.googleRing}></div>
+                <div className={styles.googleInner}>
+                   <span className={styles.googleG}>G</span>
+                   <span className="notranslate" translate="no">#1</span>
+                </div>
              </div>
              <div className={styles.metric}>
               <h3>Top 3</h3>
@@ -168,4 +168,4 @@ export default function GrowthMonitor() {
       </div>
     </section>
   );
-}
+}   

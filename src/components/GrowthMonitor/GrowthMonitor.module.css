@@ -2,7 +2,7 @@
 
 .monitorSection {
   padding: 100px 20px;
-  background: #050505; /* Fondo oscuro continuo */
+  background: #050505;
   position: relative;
   overflow: hidden;
 }
@@ -12,7 +12,6 @@
   margin: 0 auto;
 }
 
-/* HEADER */
 .header {
   text-align: center;
   margin-bottom: 60px;
@@ -37,14 +36,12 @@
   margin: 0 auto;
 }
 
-/* GRID LAYOUT */
 .grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* 2 columnas en desktop */
+  grid-template-columns: repeat(2, 1fr);
   gap: 20px;
 }
 
-/* CARDS */
 .card {
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.05);
@@ -65,7 +62,6 @@
   transform: translateY(-5px);
 }
 
-/* CONTENEDORES DE GRÁFICOS */
 .chartContainer {
   height: 100px;
   width: 100%;
@@ -81,7 +77,6 @@
   overflow: visible;
 }
 
-/* CÍRCULO DE VELOCIDAD */
 .speedCircle {
   position: relative;
   width: 100px;
@@ -99,23 +94,54 @@
   color: #fff;
 }
 
-/* BADGE DE RANKING */
-.rankBadge {
+/* === "PREMIO FALSO DE GOOGLE" === */
+.googleBadge {
+  position: relative;
   width: 80px;
   height: 80px;
-  background: linear-gradient(135deg, #ffd700, #b8860b);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 2.5rem;
-  font-weight: 900;
-  color: #000;
-  box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
   margin-bottom: 20px;
 }
 
-/* MÉTRICAS (TEXTO) */
+.googleRing {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  /* Gradiente cónico con los colores de Google */
+  background: conic-gradient(#4285F4, #EA4335, #FBBC04, #34A853, #4285F4);
+  filter: blur(4px);
+  opacity: 0.8;
+}
+
+.googleInner {
+  position: absolute;
+  inset: 3px; /* Grosor del borde */
+  background: #111;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.googleG {
+  font-family: sans-serif;
+  font-weight: 900;
+  font-size: 1.5rem;
+  /* La 'G' también con los colores */
+  background: linear-gradient(135deg, #4285F4, #EA4335, #FBBC04, #34A853);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: -5px;
+}
+
+.googleInner span:last-child {
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+/* ================================= */
+
 .metric h3 {
   font-size: 3rem;
   font-weight: 800;
@@ -134,62 +160,24 @@
   font-weight: 600;
 }
 
-/* --- MOBILE & TABLET (RESPONSIVE) --- */
 @media (max-width: 768px) {
-  .monitorSection {
-    padding: 60px 15px; /* Menos padding lateral */
-  }
-
-  .title {
-    font-size: 2.2rem; /* Título más pequeño */
-  }
-
-  .grid {
-    grid-template-columns: 1fr; /* 1 sola columna */
-    gap: 15px;
-  }
-
+  .monitorSection { padding: 60px 15px; }
+  .title { font-size: 2.2rem; }
+  .grid { grid-template-columns: 1fr; gap: 15px; }
   .card {
-    min-height: auto; /* Altura automática */
+    min-height: auto;
     padding: 25px;
-    flex-direction: row; /* Icono a la izquierda, texto a la derecha */
+    flex-direction: row;
     align-items: center;
     gap: 20px;
   }
-
-  /* Reordenamos para que quede horizontal en móvil */
-  .chartContainer {
-    width: 60px; /* Gráficos más pequeños */
-    height: 60px;
-    margin-bottom: 0;
-    flex-shrink: 0;
+  .chartContainer, .speedCircle, .googleBadge {
+    width: 60px; height: 60px; margin-bottom: 0; flex-shrink: 0;
   }
-  
-  /* Ajustes específicos para los gráficos en móvil */
-  .speedCircle {
-    width: 60px;
-    height: 60px;
-  }
-  .circleText {
-    font-size: 1.2rem;
-  }
-  .rankBadge {
-    width: 60px;
-    height: 60px;
-    font-size: 1.5rem;
-    margin-bottom: 0;
-  }
-
-  .metric {
-    text-align: left;
-  }
-
-  .metric h3 {
-    font-size: 2rem; /* Números más chicos */
-  }
-
-  .metric p {
-    font-size: 0.8rem;
-  }
+  .circleText { font-size: 1.2rem; }
+  .googleG { font-size: 1rem; }
+  .googleInner span:last-child { font-size: 0.9rem; }
+  .metric { text-align: left; }
+  .metric h3 { font-size: 2rem; }
+  .metric p { font-size: 0.8rem; }
 }
-

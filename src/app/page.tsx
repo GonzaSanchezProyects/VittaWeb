@@ -20,7 +20,7 @@ export default function Home() {
     image: 'https://vittaweb.site/og-image.jpg',
     '@id': 'https://vittaweb.site',
     url: 'https://vittaweb.site',
-    telephone: '+5492634665431', // REEMPLAZA CON TU NÚMERO REAL
+    telephone: '+5492634272885', // REEMPLAZA CON TU NÚMERO REAL
     priceRange: '$$',
     address: {
       '@type': 'PostalAddress',
@@ -36,8 +36,7 @@ export default function Home() {
       longitude: -68.476
     },
     sameAs: [
-      'https://www.linkedin.com/in/tu-perfil',
-      'https://www.instagram.com/tu-instagram'
+      'https://www.instagram.com/vittaweb'
     ]
   };
 
