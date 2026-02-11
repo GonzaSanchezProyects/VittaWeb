@@ -1,37 +1,59 @@
+/* src/components/Services/Services.tsx */
 'use client';
 import { useState } from 'react';
-// Importamos 'm' y AnimatePresence
 import { m, AnimatePresence } from 'framer-motion'; 
+import Image from 'next/image';
 import styles from './Services.module.css';
 
 const services = [
   {
     id: 1,
-    title: "Desarrollo High-End",
-    desc: "Sitios web que cargan instantáneamente. Tecnología de Netflix y Uber para su negocio.",
-    tags: ["Velocidad Extrema", "Seguridad Total", "Escalable"],
-    gradient: "radial-gradient(circle at 50% 50%, #00e5ff 0%, #0044ff 40%, #000 100%)"
+    title: "E-Commerce & Tiendas",
+    desc: "Venda 24/7 con una tienda que no duerme. Gestión de stock, pagos seguros y diseño enfocado en la conversión pura.",
+    tags: ["Shopify / Woocommerce", "Pagos Locales", "Automatización"],
+    // NUEVA IMAGEN E-COMMERCE (Estilo neon/futurista comprando)
+    image: "https://images.unsplash.com/photo-1556740738-b6a63e27c4df?auto=format&fit=crop&w=1000&q=80", 
+    gradient: "radial-gradient(circle at 50% 50%, rgba(0, 229, 255, 0.4) 0%, rgba(0, 0, 0, 0) 70%)"
   },
   {
     id: 2,
-    title: "Posicionamiento SEO",
-    desc: "Optimizamos su estructura para dominar Google. Más visibilidad significa más ventas.",
-    tags: ["#1 en Google", "Más Tráfico", "Captación"],
-    gradient: "radial-gradient(circle at 80% 20%, #00ff88 0%, #004d2e 50%, #000 100%)"
+    title: "Sitios Corporativos",
+    desc: "Eleve la percepción de su marca. Webs institucionales que transmiten autoridad, confianza y profesionalismo desde el primer segundo.",
+    tags: ["Identidad de Marca", "SEO Corporativo", "Multilenguaje"],
+    image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1000&q=80",
+    gradient: "radial-gradient(circle at 80% 20%, rgba(0, 255, 136, 0.4) 0%, rgba(0, 0, 0, 0) 70%)"
   },
   {
     id: 3,
-    title: "Diseño de Conversión",
-    desc: "Cada píxel está diseñado psicológicamente para guiar al visitante hacia la compra.",
-    tags: ["UI/UX Premium", "Identidad de Marca", "Retención"],
-    gradient: "radial-gradient(circle at 20% 80%, #ff00cc 0%, #330044 50%, #000 100%)"
+    title: "Landing Pages",
+    desc: "Páginas de aterrizaje diseñadas para campañas publicitarias. Eliminamos distracciones para que el usuario solo tenga una opción: Comprar.",
+    tags: ["Alta Conversión", "A/B Testing", "Copywriting"],
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1000&q=80",
+    gradient: "radial-gradient(circle at 20% 80%, rgba(255, 0, 204, 0.4) 0%, rgba(0, 0, 0, 0) 70%)"
   },
   {
     id: 4,
-    title: "E-Commerce Blindado",
-    desc: "Venda 24/7. Gestión de inventario, pagos seguros y automatización.",
-    tags: ["Pasarelas de Pago", "Dashboard", "Anti-Fraude"],
-    gradient: "radial-gradient(circle at 50% 0%, #ffaa00 0%, #662200 50%, #000 100%)"
+    title: "Eventos & Bodas",
+    desc: "La tendencia del momento. Invitaciones digitales interactivas, confirmación de asistencia (RSVP) y galerías de fotos para bodas inolvidables.",
+    tags: ["RSVP Digital", "Cuenta Regresiva", "Galería Interactiva"],
+    image: "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1000&q=80",
+    gradient: "radial-gradient(circle at 50% 0%, rgba(255, 170, 0, 0.4) 0%, rgba(0, 0, 0, 0) 70%)"
+  },
+  {
+    id: 5,
+    title: "Portfolios & CV",
+    desc: "Para arquitectos, fotógrafos y profesionales que necesitan mostrar su trabajo con un impacto visual cinematográfico.",
+    tags: ["Galerías 4K", "Diseño Minimalista", "Animaciones"],
+    image: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=1000&q=80",
+    gradient: "radial-gradient(circle at 80% 80%, rgba(136, 0, 255, 0.4) 0%, rgba(0, 0, 0, 0) 70%)"
+  },
+  {
+    id: 6,
+    title: "Sistemas & Dashboards",
+    desc: "Software a medida para gestionar su negocio. CRMs, paneles de administración y herramientas internas para optimizar procesos.",
+    tags: ["SaaS", "Bases de Datos", "Seguridad Total"],
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1000&q=80",
+    gradient: "radial-gradient(circle at 10% 20%, rgba(0, 136, 255, 0.4) 0%, rgba(0, 0, 0, 0) 70%)"
   }
 ];
 
@@ -48,9 +70,8 @@ export default function Services() {
     <section className={styles.section} id="servicios">
       <div className={styles.container}>
         
-        {/* LISTA */}
         <div className={styles.listContainer}>
-          <h2 className={styles.headerTitle}>NUESTRAS CAPACIDADES</h2>
+          <h2 className={styles.headerTitle}>QUÉ CONSTRUIMOS</h2>
           
           {services.map((service, index) => {
             const isActive = activeId === service.id;
@@ -71,7 +92,7 @@ export default function Services() {
                   <div className={styles.arrowIcon}>→</div>
                 </div>
 
-                {/* CONTENIDO MÓVIL (AnimatePresence + m.div) */}
+                {/* MOBILE CONTENT */}
                 <div className={styles.mobileContent}>
                   <AnimatePresence>
                     {isActive && (
@@ -83,8 +104,18 @@ export default function Services() {
                         style={{ overflow: 'hidden' }}
                       >
                         <div className={styles.mobileCard}>
-                          <div className={styles.gradientBg} style={{ background: service.gradient }} />
-                          <div className={styles.overlay} />
+                          <div className={styles.imageBackground}>
+                            <Image 
+                              src={service.image} 
+                              alt={service.title} 
+                              fill 
+                              style={{ objectFit: 'cover' }}
+                              sizes="(max-width: 768px) 100vw, 33vw"
+                            />
+                          </div>
+                          <div className={styles.gradientOverlay} style={{ background: service.gradient }} />
+                          <div className={styles.darkOverlay} />
+                          
                           <div className={styles.previewContent}>
                             <p className={styles.previewDesc}>{service.desc}</p>
                             <div className={styles.techTags}>
@@ -103,23 +134,31 @@ export default function Services() {
           })}
         </div>
 
-        {/* PREVIEW WINDOW (DESKTOP) */}
+        {/* DESKTOP PREVIEW */}
         <div className={styles.previewContainer}>
           <div className={styles.previewWindow}>
             
             <AnimatePresence mode="wait">
               <m.div
                 key={activeId}
-                className={styles.gradientBg}
-                style={{ background: getActiveService().gradient }}
+                className={styles.imageContainer}
                 initial={{ opacity: 0, scale: 1.1 }}
-                animate={{ opacity: 0.6, scale: 1 }}
+                animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.5 }}
-              />
+              >
+                 <Image 
+                    src={getActiveService().image} 
+                    alt={getActiveService().title} 
+                    fill 
+                    priority
+                    style={{ objectFit: 'cover' }}
+                    sizes="(min-width: 768px) 50vw, 100vw"
+                 />
+                 <div className={styles.darkOverlayDesktop} />
+                 <div className={styles.gradientOverlay} style={{ background: getActiveService().gradient }} />
+              </m.div>
             </AnimatePresence>
-
-            <div className={styles.overlay} />
 
             <div className={styles.previewContent}>
               <AnimatePresence mode="wait">

@@ -16,7 +16,7 @@
   min-height: 80vh;
 }
 
-/* --- ESTILOS DE ESCRITORIO (LISTA IZQUIERDA) --- */
+/* --- LISTA IZQUIERDA --- */
 .listContainer {
   flex: 1;
   display: flex;
@@ -26,11 +26,12 @@
 
 .headerTitle {
   font-size: 0.9rem;
-  color: var(--accent-color);
+  color: #00e5ff;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   margin-bottom: 40px;
   display: block;
+  font-weight: 700;
 }
 
 .serviceItem {
@@ -38,7 +39,7 @@
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   cursor: pointer;
   transition: opacity 0.3s;
-  overflow: hidden; /* Necesario para la animación móvil */
+  overflow: hidden;
 }
 
 .serviceItem:last-child {
@@ -49,7 +50,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 30px 0; /* Padding movido aquí para controlar altura */
+  padding: 25px 0;
 }
 
 .itemIndex {
@@ -60,21 +61,20 @@
 }
 
 .itemTitle {
-  font-size: 2.5rem;
+  font-size: 2rem;
   font-weight: 500;
   transition: transform 0.3s ease, color 0.3s ease;
 }
 
-/* Flecha de escritorio */
 .arrowIcon {
   opacity: 0;
   transform: translateX(-20px);
   transition: all 0.3s ease;
-  color: var(--accent-color);
+  color: #00e5ff;
   font-size: 2rem;
 }
 
-/* --- ESTILOS DE ESCRITORIO (VENTANA DERECHA) --- */
+/* --- VENTANA DERECHA (PREVIEW DESKTOP) --- */
 .previewContainer {
   flex: 1;
   display: flex;
@@ -85,7 +85,7 @@
 
 .previewWindow {
   width: 100%;
-  height: 500px;
+  height: 550px;
   background: #111;
   border-radius: 20px;
   overflow: hidden;
@@ -95,101 +95,123 @@
   box-shadow: 0 40px 80px rgba(0, 0, 0, 0.5);
 }
 
-/* Contenido interno (compartido) */
+/* Contenedor para la imagen de fondo en Desktop */
+.imageContainer {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  z-index: 0;
+}
+
+/* Capa negra semi-transparente para oscurecer la foto */
+.darkOverlayDesktop {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.6); /* Ajusta la opacidad si la foto es muy clara */
+  z-index: 1;
+}
+
+.gradientOverlay {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  z-index: 2;
+  mix-blend-mode: overlay; /* Mezcla el color del gradiente con la foto */
+}
+
 .previewContent {
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding: 40px;
+  padding: 50px;
   position: relative;
-  z-index: 2;
+  z-index: 3; /* Texto por encima de todo */
 }
 
-.gradientBg {
-  position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
-  z-index: 0;
-  opacity: 0.6;
-  transition: background 0.5s ease;
+.previewTitle { 
+  font-size: 2.5rem; 
+  font-weight: 800; 
+  margin-bottom: 15px; 
+  color: #fff; 
+  line-height: 1.1;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.5);
 }
 
-.overlay {
-  position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
-  background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.9) 100%);
-  z-index: 1;
+.previewDesc { 
+  font-size: 1.1rem; 
+  color: #eee; 
+  line-height: 1.6; 
+  max-width: 90%;
+  text-shadow: 0 2px 5px rgba(0,0,0,0.5);
 }
-
-.previewTitle { font-size: 2rem; font-weight: 700; margin-bottom: 10px; color: #fff; }
-.previewDesc { font-size: 1.1rem; color: #ccc; line-height: 1.6; }
 
 .techTags {
-  margin-top: 20px;
+  margin-top: 25px;
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
 }
 
 .tag {
-  background: rgba(255, 255, 255, 0.1);
-  padding: 5px 12px;
-  border-radius: 20px;
-  font-size: 0.8rem;
-  backdrop-filter: blur(5px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.15);
+  padding: 6px 14px;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  font-weight: 600;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
 }
 
-/* --- MÓVIL: EL ACORDEÓN (MOBILE ONLY) --- */
+/* --- MÓVIL --- */
 .mobileContent {
-  display: none; /* Oculto en escritorio */
-  padding-bottom: 30px;
+  display: none;
+  padding-bottom: 20px;
 }
 
 .mobileCard {
   position: relative;
   border-radius: 12px;
   overflow: hidden;
-  margin-top: 10px;
-  height: 300px; /* Altura de la tarjeta expandida */
+  margin-top: 5px;
+  height: 300px; /* Altura suficiente para lucir la foto */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 20px;
+}
+
+/* Imagen de fondo en Móvil */
+.imageBackground {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  z-index: 0;
+}
+
+/* Capa negra para móvil */
+.darkOverlay {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.9) 100%);
+  z-index: 1;
 }
 
 /* ESTADOS HOVER DESKTOP */
 @media (min-width: 901px) {
-  .listContainer:hover .serviceItem { opacity: 0.3; }
+  .listContainer:hover .serviceItem { opacity: 0.4; }
   .listContainer:hover .serviceItem:hover { opacity: 1; }
   .serviceItem:hover .arrowIcon { opacity: 1; transform: translateX(0); }
   .serviceItem:hover .itemTitle { transform: translateX(10px); color: #fff; }
 }
 
-/* --- MEDIA QUERIES PARA MÓVIL/TABLET --- */
+/* --- MEDIA QUERIES --- */
 @media (max-width: 900px) {
   .section { padding: 60px 20px; }
-  
-  .container { 
-    flex-direction: column; 
-    display: block; /* Quitamos flex para que sea lista pura */
-  }
-
-  /* Ocultamos la ventana derecha flotante */
+  .container { flex-direction: column; display: block; }
   .previewContainer { display: none; }
-
-  /* Ajustes de tipografía móvil */
-  .itemTitle { font-size: 1.5rem; }
-  .itemIndex { font-size: 0.8rem; margin-right: 15px; }
-  .arrowIcon { display: none; } /* Sin flecha en móvil */
-
-  /* Mostrar contenido móvil */
-  .mobileContent {
-    display: block; /* Se muestra al expandir */
-  }
-  
-  /* Indicador de activo en móvil */
-  .serviceItem[data-active="true"] .itemTitle {
-    color: var(--accent-color);
-  }
-  
-  .previewTitle { font-size: 1.5rem; }
-  .previewDesc { font-size: 0.95rem; }
+  .itemTitle { font-size: 1.4rem; }
+  .arrowIcon { display: none; }
+  .mobileContent { display: block; }
+  .serviceItem[data-active="true"] .itemTitle { color: #00e5ff; }
 }

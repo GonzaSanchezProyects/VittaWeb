@@ -1,36 +1,40 @@
+/* src/app/sitemap.ts */
 import { MetadataRoute } from 'next';
-import { LOCATIONS, SERVICES } from '@/lib/seo-data';
+import { posts } from '@/lib/posts';
+import { SERVICES, LOCATIONS } from '@/lib/seo-data'; // Importamos tu data maestra
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  // ⚠️ CAMBIA ESTO POR TU DOMINIO REAL FINAL
   const baseUrl = 'https://vittaweb.site'; 
 
-  // 1. Páginas estáticas (Home, etc)
-  const staticPages = [
-    {
-      url: baseUrl,
+  // 1. Páginas Estáticas (Home, Blog Index)
+  const staticRoutes = [
+    '',
+    '/blog',
+  ].map((route) => ({
+    url: `${baseUrl}${route}`,
+    lastModified: new Date(),
+    changeFrequency: 'monthly' as const,
+    priority: 1,
+  }));
+
+  // 2. Artículos del Blog
+  const blogRoutes = posts.map((post) => ({
+    url: `${baseUrl}/blog/${post.slug}`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly' as const,
+    priority: 0.8,
+  }));
+
+  // 3. SEO PROGRAMÁTICO (Servicios x Ciudades)
+  // Generamos automáticamente las URLs para cada combinación
+  const programmaticRoutes = SERVICES.flatMap((service) => 
+    LOCATIONS.map((city) => ({
+      url: `${baseUrl}/servicios/${service.slug}/${city.slug}`,
       lastModified: new Date(),
-      changeFrequency: 'monthly' as const,
-      priority: 1,
-    },
-  ];
+      changeFrequency: 'weekly' as const,
+      priority: 0.9, // Alta prioridad porque son Landing Pages de venta
+    }))
+  );
 
-  // 2. Generación automática de las páginas programáticas
-  const programmaticPages = [];
-
-  for (const service of SERVICES) {
-    for (const city of LOCATIONS) {
-      // Verificamos compatibilidad de idioma si es necesario
-      if (service[city.language]) {
-        programmaticPages.push({
-          url: `${baseUrl}/servicios/${service.slug}/${city.slug}`,
-          lastModified: new Date(),
-          changeFrequency: 'weekly' as const,
-          priority: 0.8, // Alta prioridad, son tus landing pages de venta
-        });
-      }
-    }
-  }
-
-  return [...staticPages, ...programmaticPages];
+  return [...staticRoutes, ...blogRoutes, ...programmaticRoutes];
 }

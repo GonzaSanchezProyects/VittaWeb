@@ -278,5 +278,234 @@ export const posts: Post[] = [
       
       <p><strong>Tu reputación tarda años en construirse y segundos en destruirse.</strong> No la arriesgues por ahorrar en seguridad.</p>
     `
+  },
+  {
+    slug: 'bodas-digitales-vs-papel',
+    title: 'Bodas 2026: Por qué las invitaciones de papel están muriendo',
+    excerpt: 'Confirmación de asistencia en tiempo real, lista de regalos bancaria y galerías QR. Descubre por qué las parejas modernas eligen una Web de Boda.',
+    date: '28 Feb 2026',
+    readTime: '4 min',
+    tags: ['Bodas', 'Tendencias', 'Eventos'],
+    content: `
+      <p class="lead">Seamos honestos: las invitaciones de papel son hermosas, pero terminan en la basura o en un cajón olvidado. Además, perseguir a los invitados para que confirmen asistencia es la parte más estresante de organizar una boda.</p>
+      
+      <h2>La solución: Tu Boda en la Nube</h2>
+      <p>Una <strong>Web de Boda</strong> no es solo una invitación, es tu asistente personal digital. En 2026, las parejas inteligentes centralizan todo en un enlace único.</p>
+
+      <h2>Ventajas que aman los novios (y los invitados)</h2>
+      <ul>
+        <li><strong>RSVP Automático:</strong> Los invitados confirman asistencia desde su celular. Tú ves la lista actualizada en tiempo real. Adiós al Excel manual.</li>
+        <li><strong>Regalos sin fricción:</strong> ¿Sobres con dinero? Eso es del pasado. Integra tu CBU/CVU o lista de regalos directamente para transferencias en un clic.</li>
+        <li><strong>Mapa y GPS:</strong> Botón directo a Google Maps para que nadie se pierda llegando a la finca o al salón.</li>
+        <li><strong>Código de Vestimenta Visual:</strong> Muestra ejemplos exactos de qué significa "Elegante Sport" para evitar desastres de moda.</li>
+      </ul>
+
+      <p>En <strong>Vitta Web</strong> diseñamos sitios de boda que parecen revistas de moda. Tu historia de amor merece una presentación de alto impacto, no un PDF enviado por WhatsApp.</p>
+    `
+  },
+  {
+    slug: 'menu-digital-restaurantes',
+    title: 'Restaurantes: Por favor, dejen de usar PDFs en el celular',
+    excerpt: 'Hacer "zoom" para leer un precio es la peor experiencia de usuario. Los menús interactivos aumentan el ticket promedio un 15%.',
+    date: '02 Mar 2026',
+    readTime: '3 min',
+    tags: ['Gastronomía', 'UX', 'Ventas'],
+    content: `
+      <p class="lead">Llegas a un restaurante, escaneas el QR y... se descarga un archivo PDF de 10MB que tienes que pellizcar con los dedos para leer los ingredientes. <strong>Es la experiencia digital más frustrante del siglo XXI.</strong></p>
+      
+      <h2>La psicología del Menú Interactivo</h2>
+      <p>Un menú web bien diseñado no es una lista de precios, es una herramienta de venta. Cuando el usuario navega cómodamente, sin hacer zoom, su cerebro está más relajado y predispuesto a pedir más.</p>
+
+      <h2>¿Por qué el PDF te hace perder dinero?</h2>
+      <ul>
+        <li><strong>No es responsive:</strong> Está diseñado para imprimir en A4, no para una pantalla de 6 pulgadas.</li>
+        <li><strong>Fotos estáticas:</strong> En una web, podemos poner carruseles de fotos de alta definición que despiertan el apetito.</li>
+        <li><strong>Dificultad de actualización:</strong> ¿Cambiaste un precio? Tienes que editar el diseño y resubir el archivo. Con una web, lo cambias en segundos.</li>
+      </ul>
+
+      <p>Digitaliza tu carta con <strong>Vitta Web</strong>. Hacemos menús que cargan al instante y hacen que la comida entre por los ojos antes de llegar a la mesa.</p>
+    `
+  },
+  {
+    slug: 'portfolio-vs-cv',
+    title: 'El Currículum ha muerto: Larga vida al Portfolio Web',
+    excerpt: 'Si eres arquitecto, fotógrafo o diseñador, un PDF no le hace justicia a tu trabajo. Necesitas una galería inmersiva que venda por ti.',
+    date: '05 Mar 2026',
+    readTime: '4 min',
+    tags: ['Marca Personal', 'Portfolio', 'Profesional'],
+    content: `
+      <p class="lead">En un mercado saturado, enviar un CV en Word o PDF es ser uno más del montón. Si vendes servicios visuales o creativos, tu presentación debe ser una experiencia, no un documento.</p>
+      
+      <h2>Tu web es tu oficina digital 24/7</h2>
+      <p>Un <strong>Portfolio Web High-End</strong> permite mostrar tus proyectos en 4K, con animaciones suaves y una narrativa que tú controlas. No dependes del algoritmo de Instagram ni del límite de tamaño de un correo.</p>
+
+      <h2>Elementos vitales de un Portfolio Ganador</h2>
+      <ul>
+        <li><strong>Velocidad de carga:</strong> Los reclutadores y clientes no esperan más de 2 segundos.</li>
+        <li><strong>Casos de Estudio:</strong> No solo muestres la foto final, explica el problema y tu solución.</li>
+        <li><strong>Call to Action (CTA):</strong> Botones claros de "Contratar" o "Agendar Llamada". Facilita que te den dinero.</li>
+      </ul>
+
+      <p>Tu trabajo es premium. ¿Por qué tu presentación se ve barata? Da el salto de calidad hoy.</p>
+    `
+  },
+  {
+    slug: 'tienda-propia-vs-mercadolibre',
+    title: 'E-commerce: ¿Vender en MercadoLibre o tener Tienda Propia?',
+    excerpt: 'Las comisiones de los marketplaces se comen tu ganancia. Descubre cuándo es el momento de independizarte digitalmente.',
+    date: '10 Mar 2026',
+    readTime: '6 min',
+    tags: ['E-commerce', 'Negocios', 'Estrategia'],
+    content: `
+      <p class="lead">MercadoLibre es genial para empezar, pero pésimo para escalar. Cuando dependes 100% de un marketplace, no tienes clientes, tienes "compradores de la plataforma".</p>
+      
+      <h2>El precio de la "comodidad"</h2>
+      <p>Pagar comisiones del 15% al 30% por venta es insostenible a largo plazo. Pero el problema real no es el dinero, son los <strong>datos</strong>.</p>
+
+      <h2>¿Por qué necesitas tu propio dominio?</h2>
+      <ul>
+        <li><strong>Base de Datos Propia:</strong> En tu web, el correo del cliente es tuyo. Puedes hacer Email Marketing y venderles de nuevo sin pagar publicidad (Retargeting gratuito).</li>
+        <li><strong>Sin Competencia al lado:</strong> En un marketplace, tu producto aparece pegado al de tu competencia más barata. En tu web, eres el único protagonista.</li>
+        <li><strong>Branding:</strong> Construyes marca. El cliente recuerda "Lo compré en VittaStore", no "Lo compré en MercadoLibre".</li>
+      </ul>
+
+      <p>No tienes que elegir uno u otro. La estrategia ganadora es <strong>híbrida</strong>: usa el marketplace para captar y tu web para fidelizar.</p>
+    `
+  },
+  {
+    slug: 'velocidad-web-seo',
+    title: '¿Por qué Amazon pierde millones si su web tarda 1 segundo más?',
+    excerpt: 'La paciencia digital no existe. Cómo los Core Web Vitals afectan directamente a tu facturación y posicionamiento en Google.',
+    date: '12 Mar 2026',
+    readTime: '5 min',
+    tags: ['Velocidad', 'SEO', 'Tecnología'],
+    content: `
+      <p class="lead">Estudios de Google y Amazon confirman un dato brutal: <strong>por cada segundo de retraso en la carga móvil, las conversiones caen un 20%.</strong></p>
+      
+      <h2>La Tiranía de la Velocidad</h2>
+      <p>Vivimos en la era de la inmediatez. Si tu web tarda 4 segundos en cargar en 4G, el usuario ya cerró la pestaña y se fue a la competencia. No es impaciencia, es el estándar del mercado.</p>
+
+      <h2>Next.js: La tecnología de la velocidad</h2>
+      <p>En Vitta Web no usamos constructores visuales pesados como Elementor o Divi. Programamos con <strong>Next.js</strong>, la tecnología que pre-renderiza las páginas.</p>
+      <ul>
+        <li><strong>Carga Instantánea:</strong> El usuario ve el contenido en milisegundos.</li>
+        <li><strong>Amor de Google:</strong> Google premia a las webs rápidas poniéndolas primero en los resultados.</li>
+        <li><strong>Ahorro de Datos:</strong> Webs más ligeras consumen menos plan de datos de tus clientes.</li>
+      </ul>
+
+      <p>La velocidad no es una "característica técnica", es tu principal ventaja competitiva.</p>
+    `
+  },
+  {
+    slug: 'automatizacion-turnos',
+    title: 'Deja de usar WhatsApp para agendar turnos',
+    excerpt: '¿Cuántas horas pierdes respondiendo "¿Tenes turno a las 5?"? Automatiza tu agenda y recupera tu vida.',
+    date: '15 Mar 2026',
+    readTime: '4 min',
+    tags: ['Productividad', 'SaaS', 'Pymes'],
+    content: `
+      <p class="lead">Si eres médico, peluquero, psicólogo o consultor, tu tiempo vale oro. Estar contestando mensajes para coordinar horarios es la tarea más improductiva que existe.</p>
+      
+      <h2>El sistema trabaja por ti</h2>
+      <p>Imagina una web donde tu cliente entra, ve tus huecos libres, selecciona el servicio, paga una seña para congelar el precio y recibe el recordatorio automático. Todo mientras tú duermes o trabajas.</p>
+
+      <h2>Beneficios de un sistema de reservas propio</h2>
+      <ul>
+        <li><strong>Cero Ausencias:</strong> Al cobrar una seña online, el cliente se compromete. El ausentismo baja drásticamente.</li>
+        <li><strong>Base de Datos:</strong> Sabes quién vino, cuándo y qué se hizo. Puedes enviarle promociones de cumpleaños automáticas.</li>
+        <li><strong>Profesionalismo:</strong> Un link de reserva transmite una imagen de organización superior a "escríbeme al privado".</li>
+      </ul>
+
+      <p>En <strong>Vitta Web</strong> integramos sistemas de agenda a medida que se sincronizan con tu Google Calendar.</p>
+    `
+  },
+  {
+    slug: 'dark-mode-tendencia',
+    title: 'Dark Mode: No es solo moda, es salud visual y batería',
+    excerpt: 'Por qué las grandes aplicaciones se pasaron al lado oscuro y por qué tu sitio web debería ofrecer lo mismo.',
+    date: '18 Mar 2026',
+    readTime: '3 min',
+    tags: ['Diseño UI', 'UX', 'Moderno'],
+    content: `
+      <p class="lead">Hace unos años, el "Modo Oscuro" era cosa de programadores. Hoy, es una exigencia del usuario. Apple, Android, Instagram y WhatsApp ya lo tienen nativo.</p>
+      
+      <h2>Más que estética: Funcionalidad</h2>
+      <p>Implementar un diseño oscuro (Dark Mode) en tu sitio web tiene beneficios tangibles:</p>
+      <ul>
+        <li><strong>Ahorro de Batería:</strong> En pantallas OLED (la mayoría de los celulares modernos), los píxeles negros están apagados. El modo oscuro ahorra hasta un 30% de batería.</li>
+        <li><strong>Salud Visual:</strong> Reduce la fatiga ocular cuando tus usuarios navegan de noche.</li>
+        <li><strong>Elegancia Premium:</strong> El negro se asocia psicológicamente con el lujo y la sofisticación.</li>
+      </ul>
+
+      <p>En Vitta Web desarrollamos sitios que detectan automáticamente la preferencia de tu sistema. Si tu celular está en modo oscuro, tu web también lo estará.</p>
+    `
+  },
+  {
+    slug: 'inmobiliaria-digital',
+    title: 'Inmobiliarias: Vender propiedades sin visitas presenciales es posible',
+    excerpt: 'Tours virtuales, mapas interactivos y galerías ultrarrápidas. La nueva era del Real Estate en Mendoza.',
+    date: '20 Mar 2026',
+    readTime: '5 min',
+    tags: ['Real Estate', 'Inmobiliaria', 'Ventas'],
+    content: `
+      <p class="lead">El comprador de propiedades de hoy investiga el 90% online antes de llamar. Si tus fotos tardan en cargar o la ficha es pobre, perdiste la venta antes de empezar.</p>
+      
+      <h2>El Tour de la Propiedad comienza en la Web</h2>
+      <p>Las inmobiliarias líderes ya no son solo vendedoras de metros cuadrados, son productoras de contenido visual. Tu web debe estar a la altura.</p>
+
+      <h2>Funcionalidades Clave para Real Estate</h2>
+      <ul>
+        <li><strong>Filtrado Avanzado:</strong> Búsqueda por mapa, barrio, precio y amenities en tiempo real.</li>
+        <li><strong>Carga Progresiva de Imágenes:</strong> Galerías de 50 fotos que no traban el celular.</li>
+        <li><strong>Integración con WhatsApp:</strong> Botón flotante que lleva directo al agente asignado a esa propiedad específica.</li>
+      </ul>
+
+      <p>Deja de depender solo de Zonaprop. Tu propia web inmobiliaria es tu activo digital más valioso para captar exclusivas.</p>
+    `
+  },
+  {
+    slug: 'landing-page-vs-web',
+    title: '¿Necesito una Web completa o una Landing Page?',
+    excerpt: 'No siempre "más es mejor". Descubre cuándo una página única de alta conversión es la estrategia correcta para tu campaña.',
+    date: '22 Mar 2026',
+    readTime: '4 min',
+    tags: ['Marketing', 'Estrategia', 'Conversión'],
+    content: `
+      <p class="lead">Este es el error número 1 al hacer publicidad en Google o Instagram: mandar el tráfico a la "Home" de tu sitio. Es como tirar el dinero a la basura.</p>
+      
+      <h2>El poder del Foco Único</h2>
+      <p>Una <strong>Landing Page</strong> (Página de Aterrizaje) tiene una sola misión: que el usuario haga UNA acción (comprar, registrarse o descargar). No tiene menú, no tiene "Quiénes somos", no tiene distracciones.</p>
+
+      <h2>¿Cuándo usar una Landing Page?</h2>
+      <ul>
+        <li><strong>Lanzamiento de un producto específico:</strong> Vendes un curso o un ebook.</li>
+        <li><strong>Campañas de Google Ads:</strong> Si buscan "Abogado de divorcios", deben llegar a una página que hable solo de divorcios, no a la home genérica del estudio.</li>
+        <li><strong>Captación de Leads:</strong> Ofreces un descuento a cambio del email.</li>
+      </ul>
+
+      <p>Si quieres branding, haz una Web. Si quieres ventas directas y medibles, necesitas una Landing Page optimizada por Vitta Web.</p>
+    `
+  },
+  {
+    slug: 'mitos-seo',
+    title: '3 Mentiras sobre el SEO que te están contando',
+    excerpt: 'No, no necesitas poner la palabra clave 100 veces. Google es más listo que eso. Aprende qué funciona realmente en 2026.',
+    date: '26 Mar 2026',
+    readTime: '5 min',
+    tags: ['SEO', 'Google', 'Mitos'],
+    content: `
+      <p class="lead">Hay muchos "gurús" vendiendo humo sobre cómo aparecer primero en Google. El algoritmo ha cambiado radicalmente con la Inteligencia Artificial y lo que funcionaba en 2020 hoy te penaliza.</p>
+      
+      <h2>Mito 1: "El SEO es solo poner palabras clave"</h2>
+      <p>Falso. Hoy Google entiende la <strong>Intención de Búsqueda</strong>. Prefiere un artículo que responda bien una pregunta a uno que repita "zapatillas baratas" 50 veces.</p>
+
+      <h2>Mito 2: "El SEO es gratis"</h2>
+      <p>El tráfico orgánico es gratis, pero conseguirlo cuesta tiempo y optimización técnica. Una web lenta, aunque tenga buen contenido, nunca rankeará primero.</p>
+
+      <h2>Mito 3: "Una vez que llegas al #1, te quedas ahí"</h2>
+      <p>El SEO es una carrera, no una meta. Si dejas de actualizar tu web y tu competencia mejora su velocidad o contenido, te pasarán por encima en semanas.</p>
+
+      <p>El verdadero SEO moderno es técnico: velocidad, estructura de datos y experiencia de usuario. Justo en lo que nos especializamos.</p>
+    `
   }
 ];
